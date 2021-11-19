@@ -2,20 +2,17 @@ package com.example.kochbuch.model;
 
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
+import androidx.room.Entity;
 
 import com.example.kochbuch.enums.Foodtypes;
 
 import java.util.List;
-
+@Entity
 public class Recipe extends Basemodel {
 
     @NonNull
     @ColumnInfo(name = "name")
     private String name;
-
-    @NonNull
-    @ColumnInfo(name = "ingredients")
-    private List<RecipeIngredient> ingredients;
 
     @NonNull
     @ColumnInfo(name = "instruction")
@@ -34,9 +31,6 @@ public class Recipe extends Basemodel {
         this.name = name;
     }
 
-    public void setIngredients(@NonNull List<RecipeIngredient> ingredients) {
-        this.ingredients = ingredients;
-    }
 
     @NonNull
     public String getInstruction() {
@@ -56,15 +50,6 @@ public class Recipe extends Basemodel {
         this.description = description;
     }
 
-    public Foodtypes getRFoodtype(){
-        Foodtypes type = Foodtypes.VEGAN;
-        for (RecipeIngredient ingredient:ingredients) {
-            if(type.ordinal() < ingredient.getIngredient().getFoodtype().ordinal() ){
-                type = ingredient.getIngredient().getFoodtype();
-            }
-        }
-        return type;
-    }
 
     @NonNull
     @Override

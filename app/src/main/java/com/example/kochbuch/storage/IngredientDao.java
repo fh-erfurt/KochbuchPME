@@ -20,8 +20,8 @@ public interface IngredientDao extends BaseDao<Ingredient>{
     List<Ingredient> getContacts();
 
     @Query("SELECT * from Ingredient ORDER BY id DESC LIMIT 1")
-    Recipe getLastEntry();
+    Ingredient getLastEntry();
 
     @Query("SELECT * from Ingredient WHERE id=:id1 ")
-    Recipe getEntryById(int id1);
+    Ingredient getEntryById(int id1);
 }
