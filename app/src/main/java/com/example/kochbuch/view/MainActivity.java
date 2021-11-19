@@ -1,4 +1,4 @@
-package com.example.kochbuch.core;
+package com.example.kochbuch.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 

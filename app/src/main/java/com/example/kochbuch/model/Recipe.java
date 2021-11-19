@@ -7,7 +7,7 @@ import androidx.room.Entity;
 import com.example.kochbuch.enums.Foodtypes;
 
 import java.util.List;
-@Entity
+@Entity(tableName = "Recipe")
 public class Recipe extends Basemodel {
 
     @NonNull
@@ -21,6 +21,12 @@ public class Recipe extends Basemodel {
     @NonNull
     @ColumnInfo(name = "description")
     private String description;
+
+    public Recipe(String name,String instruction,String description){
+        this.name = name;
+        this.instruction = instruction;
+        this.description = description;
+    }
 
     @NonNull
     public String getName() {

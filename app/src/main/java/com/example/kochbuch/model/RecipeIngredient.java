@@ -5,7 +5,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 
-@Entity(foreignKeys = {
+@Entity(tableName = "RecipeIngredient",foreignKeys = {
         @ForeignKey(entity = Recipe.class,
                 parentColumns = "id",
                 childColumns = "recipeId",

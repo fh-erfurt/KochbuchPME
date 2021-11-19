@@ -34,7 +34,7 @@ public class RecipeRepository {
         this.recipeDao = db.recipeDao();
     }
 
-    public List<Recipe> getIngredients(){
+    public List<Recipe> getRecipes(){
         return this.query(()->this.recipeDao.getRecipes());
     }
 

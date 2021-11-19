@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Kochbuch">
         <activity
-            android:name=".core.MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

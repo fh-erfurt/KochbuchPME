@@ -5,7 +5,7 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 
 import com.example.kochbuch.enums.Foodtypes;
-@Entity
+@Entity(tableName = "Ingredient")
 public class Ingredient extends Basemodel {
 
     @NonNull
