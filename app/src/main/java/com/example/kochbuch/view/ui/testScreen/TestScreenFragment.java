@@ -23,9 +23,10 @@ public class TestScreenFragment extends BaseFragment {
 
         testScreenViewModel = this.getViewModel(TestScreenViewModel.class);
 
-        View root = inflater.inflate(R.layout.activity_main, container, false);
+        View root = inflater.inflate(R.layout.fragment_home, container, false);
         //declared in fragment_home xml
         TextView textRecipes = root.findViewById(R.id.text_recipes);
+        System.out.println("wir sind hier:"+textRecipes);
         textRecipes.setMovementMethod(new ScrollingMovementMethod());
 
         long success = testScreenViewModel.genTestData();
