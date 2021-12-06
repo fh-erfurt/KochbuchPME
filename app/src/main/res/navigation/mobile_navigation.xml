@@ -3,24 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_recipeList">
+    app:startDestination="@+id/navigation_favorites">
 
     <fragment
-        android:id="@+id/navigation_recipeList"
-        android:name="com.example.kochbuch.view.ui.testScreen.TestScreenFragment"
-        android:label="@string/title_recipeList"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_favorites"
+        android:name="com.example.kochbuch.view.ui.favorites.FavoriteRecipeListFragment"
+        android:label="@string/title_Favorites"
+        tools:layout="@layout/fragment_recipe_list" >
+        <action
+            android:id="@+id/action_contact_list_to_contact_detail"
+            app:destination="@id/navigation_contact_detail"
+            app:enterAnim="@anim/fragment_fade_enter"
+            app:exitAnim="@anim/fragment_fade_exit"
+            app:launchSingleTop="false"
+            app:popUpToInclusive="false" />
+    </fragment>
 
     <!--<fragment
         android:id="@+id/navigation_input"
         android:name="de.fhe.ai.pme.contactapp.view.ui.input.InputFragment"
         android:label="@string/title_contact_form"
-        tools:layout="@layout/fragment_input" />
+        tools:layout="@layout/fragment_input" />-->
 
     <fragment
-        android:id="@+id/navigation_search"
-        android:name="de.fhe.ai.pme.contactapp.view.ui.settings.SettingsFragment"
-        android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />-->
+        android:id="@+id/navigation_browse"
+        android:name="com.example.kochbuch.view.ui.browse.BrowseFragment"
+        android:label="@string/title_browse"
+        tools:layout="@layout/fragment_browse" />
+
+    <fragment
+        android:id="@+id/navigation_contact_detail"
+        android:name="com.example.kochbuch.view.ui.recipedetail.RecipeDetailFragment"
+        android:label="@string/title_recipe_details"
+        tools:layout="@layout/fragment_recipe_detail">
+        <argument
+            android:name="recipeId"
+            app:argType="long" />
+    </fragment>
     
 </navigation>

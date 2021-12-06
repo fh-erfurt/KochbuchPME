@@ -3,6 +3,7 @@ package com.example.kochbuch.storage;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.kochbuch.enums.Foodtypes;
 import com.example.kochbuch.model.Ingredient;
 import com.example.kochbuch.model.Recipe;
 
@@ -36,6 +37,14 @@ public class RecipeRepository {
 
     public List<Recipe> getRecipes(){
         return this.query(()->this.recipeDao.getRecipes());
+    }
+
+    public List<Recipe> getFavorites() {
+        return this.query(()->this.recipeDao.getFavorites());
+    }
+
+    public List<Recipe> getByFoodtype(Foodtypes fdt){
+        return  this.query(()->this.recipeDao.getByFoodtype(fdt));
     }
 
     private List<Recipe> query( Callable<List<Recipe>> query )

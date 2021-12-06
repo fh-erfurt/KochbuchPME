@@ -45,6 +45,8 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     // Test helpers
     testImplementation "androidx.room:room-testing:$room_version"
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     // Faker Lib for test data generation
     implementation 'com.github.javafaker:javafaker:1.0.2'

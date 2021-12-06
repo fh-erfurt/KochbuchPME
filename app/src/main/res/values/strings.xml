@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Kochbuch</string>
-    <string name="title_input">input</string>
+    <string name="title_input">add new Recipe</string>
     <string name="title_recipeList">recipes</string>
-    <string name="title_search">browse</string>
+    <string name="title_Favorites">favorites</string>
+    <string name="text_descr_recipe_picture">Recipe Picture</string>
+    <string name="title_browse">browse</string>
+    <string name="text_empty_list">#No Content#</string>
+    <string name="title_recipe_details">details</string>
 </resources>

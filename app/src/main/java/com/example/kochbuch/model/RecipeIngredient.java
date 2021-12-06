@@ -4,30 +4,25 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 
-@Entity(tableName = "RecipeIngredient",foreignKeys = {
-        @ForeignKey(entity = Recipe.class,
-                parentColumns = "id",
-                childColumns = "recipeId",
-                onDelete = ForeignKey.CASCADE),
-        @ForeignKey(entity = Ingredient.class,
-            parentColumns = "id",
-            childColumns = "ingredientId",
-            onDelete = ForeignKey.CASCADE)
-        })
+@Entity(tableName = "RecipeIngredient")
 public class RecipeIngredient extends Basemodel {
 
     @NonNull
-    @ColumnInfo(name = "ingredientId", index = true)
+    @ColumnInfo(name = "ingredientId")
     private int ingredientId;
 
     @NonNull
-    @ColumnInfo(name = "recipeId", index = true)
+    @ColumnInfo(name = "recipeId")
     private int recipeId;
 
     @NonNull
     @ColumnInfo(name = "quantityInG")
     private int quantityInG;
+
+    @Ignore
+    private Ingredient ingredient;
 
 
     @NonNull
@@ -58,5 +53,13 @@ public class RecipeIngredient extends Basemodel {
 
     public void setQuantityInG(int quantityInG) {
         this.quantityInG = quantityInG;
+    }
+
+    public Ingredient getIngredient() {
+        return ingredient;
+    }
+
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
     }
 }

@@ -9,9 +9,7 @@ import com.example.kochbuch.enums.Foodtypes;
 @Entity(tableName = "Ingredient")
 public class Ingredient extends Basemodel {
 
-    @NonNull
-    @ColumnInfo(name = "foodtypeId")
-    private Foodtypes foodtype;
+
 
     @NonNull
     @ColumnInfo(name = "name")
@@ -22,12 +20,6 @@ public class Ingredient extends Basemodel {
     private int kcal;
 
 
-    public Foodtypes getFoodtype(){
-        return this.foodtype;
-    }
-    public void setFoodtype(Foodtypes newtype){
-        this.foodtype = newtype;
-    }
 
     public String getName(){
         return this.name;

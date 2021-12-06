@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Query;
 
 
+import com.example.kochbuch.enums.Foodtypes;
 import com.example.kochbuch.model.Recipe;
 
 import java.util.List;
@@ -25,4 +26,10 @@ public interface RecipeDao extends BaseDao<Recipe> {
 
     @Query("SELECT * from Recipe WHERE id=:id1 ")
     Recipe getEntryById(int id1);
+
+    @Query("SELECT * from Recipe WHERE favorite = 1")
+    List<Recipe> getFavorites();
+
+    @Query("SELECT * from Recipe WHERE foodtype = :fdt1")
+    List<Recipe> getByFoodtype(Foodtypes fdt1);
 }

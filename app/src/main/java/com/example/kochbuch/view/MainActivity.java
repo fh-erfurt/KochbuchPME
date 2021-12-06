@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.navigation_recipeList,
                 R.id.navigation_input,
-                R.id.navigation_search)
+                R.id.navigation_browse)
                 .build();
 
         NavController navController = Navigation.findNavController(this,R.id.nav_host_fragment);
