@@ -7,4 +7,5 @@
     <string name="title_browse">browse</string>
     <string name="text_empty_list">#No Content#</string>
     <string name="title_recipe_details">details</string>
+    <string name="input">addNewRecipe</string>
 </resources>

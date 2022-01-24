@@ -22,6 +22,7 @@ public class RecipeListViewModel extends AndroidViewModel {
     public long genTestData(){
         if(this.recipeRepository.getRecipes().isEmpty()){
             Recipe recipe = new Recipe("Test1","cook for 59sec","1min noodles", Foodtypes.VEGETARIAN);
+            recipe.setFavorite(true);
             return this.recipeRepository.insertAndWait(recipe);
         }
         return -1;

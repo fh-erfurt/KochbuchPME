@@ -22,8 +22,8 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_recipeList,
                 R.id.navigation_input,
+                R.id.navigation_favorites,
                 R.id.navigation_browse)
                 .build();
 

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kochbuch.R;
@@ -31,7 +32,14 @@ public class FavoriteRecipeListFragment extends BaseFragment {
         RecyclerView recipeListView = root.findViewById(R.id.list_view_recipes);
 
         long success = recipeListViewModel.genTestData();
+        System.out.println("success on "+success);
+
+
         List<Recipe> recipeList = recipeListViewModel.getRecipes();
+
+        for (Recipe recipe:recipeList) {
+            System.out.println(recipe.getName());
+        }
         // view adapter
         final RecipeListAdapter adapter = new RecipeListAdapter(this.requireActivity(),
                 recipeId -> {
@@ -41,6 +49,10 @@ public class FavoriteRecipeListFragment extends BaseFragment {
                     nc.navigate( R.id.action_contact_list_to_contact_detail, args );
                 });
 
+        recipeListView.setAdapter(adapter);
+        recipeListView.setLayoutManager(new LinearLayoutManager(this.requireActivity()));
+        adapter.setRecipeList(recipeList);
+        //System.out.println("recipe "+recipeList.get(0).getName());
         return root;
     }
 

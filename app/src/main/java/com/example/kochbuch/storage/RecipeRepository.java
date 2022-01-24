@@ -47,6 +47,10 @@ public class RecipeRepository {
         return  this.query(()->this.recipeDao.getByFoodtype(fdt));
     }
 
+    public void  deleteAllRecipes(){
+        this.recipeDao.deleteAll();
+    }
+
     private List<Recipe> query( Callable<List<Recipe>> query )
     {
         try {
