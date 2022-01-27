@@ -29,7 +29,7 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
         private final ImageView recipeImage;
 
         private long currentRecipeId = -1;
-
+        // defines the Recipe RecyclerView
         private RecipeViewHolder(View itemView, RecipeClickListener recipeClickListener) {
             super(itemView);
             this.recipeName = itemView.findViewById(R.id.list_item_recipe_name);
@@ -39,7 +39,7 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
                 recipeClickListener.onClick( this.currentRecipeId );
             });
         }
-
+        // hmm
         public ItemDetailsLookup.ItemDetails<Long> getItemDetails() {
             return new ItemDetailsLookup.ItemDetails<Long>() {
                 @Override
@@ -58,7 +58,7 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
     private final LayoutInflater inflater;
     private final RecipeClickListener recipeClickListener;
     private SelectionTracker<Long> selectionTracker;
-
+    // adapter is important
     public RecipeListAdapter(Context context, RecipeClickListener recipeClickListener) {
         super(new ListDiffCallback());
         this.inflater = LayoutInflater.from(context);
@@ -69,14 +69,14 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
     public void setSelectionTracker(SelectionTracker<Long> selectionTracker) {
         this.selectionTracker = selectionTracker;
     }
-
+    // this too
     @NonNull
     @Override
     public RecipeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = this.inflater.inflate(R.layout.list_item_recipe, parent, false);
         return new RecipeViewHolder(itemView, this.recipeClickListener);
     }
-
+    // this probably also
     @Override
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
         Recipe current = this.getItem(position);
@@ -86,10 +86,10 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
 
         Picasso p = Picasso.get();
 
-        p.load(current.getPicturePath())
+        /*p.load(current.getPicturePath())
                 .placeholder(R.drawable.recipe_preview_placeholder)
                 .error(R.drawable.icon_error)
-                .into( holder.recipeImage );
+                .into( holder.recipeImage );*/
     }
 
 }

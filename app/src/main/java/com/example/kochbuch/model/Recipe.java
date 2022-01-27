@@ -54,6 +54,7 @@ public class Recipe extends Basemodel {
         this.description = description;
         this.foodtype = foodtype;
         this.favorite = false;
+        this.picturePath = "";
     }
 
     @NonNull

@@ -32,7 +32,7 @@ import java.util.List;
 
 public class FavoriteRecipeListFragment extends BaseFragment {
     private RecipeListViewModel recipeListViewModel;
-
+    //Start Screen of the app
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState){
 
@@ -40,9 +40,7 @@ public class FavoriteRecipeListFragment extends BaseFragment {
         this.recipeListViewModel = this.getViewModel(RecipeListViewModel.class);
         View root = inflater.inflate(R.layout.fragment_recipe_list, container, false);
         System.out.println("generating testdata");
-        // generate new Testdata if not present
-        //long success = recipeListViewModel.genTestData();
-        //System.out.println("success on "+success);
+        //long success = recipeListViewModel.genTestData(); //TODO this can generate Testdata!
 
         // configure Recycler View
         RecyclerView recipeListView = root.findViewById(R.id.list_view_recipes);
@@ -59,12 +57,7 @@ public class FavoriteRecipeListFragment extends BaseFragment {
         recipeListView.setAdapter(adapter);
         recipeListView.setLayoutManager(new LinearLayoutManager(this.requireActivity()));
 
-        //LiveData<List<Recipe>> recipeList = recipeListViewModel.getRecipes();
-
-        System.out.println("setting observer");
-        //adapter.setRecipeList(recipeList);
-        recipeListViewModel.getRecipes().observe(this.requireActivity(), adapter::submitList);
-        //System.out.println("recipe "+recipeList.get(0).getName());
+        recipeListViewModel.getFavorites().observe(this.requireActivity(), adapter::submitList);
         return root;
     }
 }

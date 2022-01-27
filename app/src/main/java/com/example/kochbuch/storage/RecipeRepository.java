@@ -57,7 +57,24 @@ public class RecipeRepository {
 
     public LiveData<List<Recipe>> getRecipe(long recipeId){
         LiveData<List<RecipeWithIngredient>> recipeWithIngredients = this.queryLiveData(()->this.recipeDao.getRecipe(recipeId));
+        // we get the LifeData as RecipeWithIngredient List because there are multiple Ingredients in a recipe
+        // that's why we have to map the RecipeIngredient Objects to the Recipe Objects
+        // for that we use the function: merge() defined in RecipeWithIngredient
+        // finally we return a List with one object in it: the Recipe filled with all the ingredient references
+        // to actually get all the ingredients we have to manually get them later via the reference ids
         return Transformations.map(recipeWithIngredients, input -> input.stream().map(RecipeWithIngredient::merge).collect(Collectors.toList()) );
+    }
+
+    public LiveData<List<Recipe>> getFavorites(){
+        return this.queryLiveData(this.recipeDao::getFavorites);
+    }
+
+    public void update(Recipe recipe){
+        CookbookDatabase.execute(()->recipeDao.update(this.prepareContactForWriting(recipe)));
+    }
+
+    public void deleteAll(){
+        CookbookDatabase.execute(recipeDao::deleteAll);
     }
 
     private <T> LiveData<T> queryLiveData( Callable<LiveData<T>> query )
@@ -71,6 +88,16 @@ public class RecipeRepository {
 
         // Well, is this a reasonable default return value?
         return new MutableLiveData<>();
+    }
+
+    private Recipe prepareContactForWriting(Recipe recipe ) {
+        if( recipe.getCreated() < 0 )
+            recipe.setCreated( System.currentTimeMillis() );
+
+        recipe.setModified( recipe.getCreated() );
+        recipe.setVersion( recipe.getVersion() + 1 );
+
+        return recipe;
     }
 
 }

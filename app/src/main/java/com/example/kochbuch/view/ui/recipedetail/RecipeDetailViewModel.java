@@ -25,5 +25,9 @@ public class RecipeDetailViewModel extends AndroidViewModel {
     public LiveData<List<Recipe>> getRecipe(long recipeId){
         return this.recipeRepository.getRecipe(recipeId);
     }
+    public void updateRecipe(Recipe recipe){
+        this.recipeRepository.update(recipe);
+    }
+    //TODO: get ingredient details here
 
 }
