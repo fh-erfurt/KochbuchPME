@@ -3,6 +3,7 @@ package com.example.kochbuch.view.ui.recipelist;
 import android.app.Application;
 
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 
 import com.example.kochbuch.enums.Foodtypes;
@@ -20,31 +21,13 @@ public class RecipeListViewModel extends AndroidViewModel {
     }
 
     public long genTestData(){
-        if(this.recipeRepository.getRecipes().isEmpty()){
-            Recipe recipe = new Recipe("Test1","cook for 59sec","1min noodles", Foodtypes.VEGETARIAN);
-            recipe.setFavorite(true);
-            return this.recipeRepository.insertAndWait(recipe);
-        }
-        return -1;
+        Recipe recipe = new Recipe("Test1","cook for 59sec","1min noodles", Foodtypes.VEGETARIAN);
+        recipe.setFavorite(true);
+        return this.recipeRepository.insert(recipe);
     }
 
-    public List<Recipe> getRecipes(){
+    public LiveData<List<Recipe>> getRecipes(){
         return this.recipeRepository.getRecipes();
     }
 
-    public List<Recipe> getVegetarian(){
-        return this.recipeRepository.getByFoodtype(Foodtypes.VEGETARIAN);
-    }
-
-    public List<Recipe> getOmnivore(){
-        return this.recipeRepository.getByFoodtype(Foodtypes.OMNIVORE);
-    }
-
-    public List<Recipe> getVegan(){
-        return this.recipeRepository.getByFoodtype(Foodtypes.VEGAN);
-    }
-
-    public List<Recipe> getFavorites(){
-        return this.recipeRepository.getFavorites();
-    }
 }

@@ -1,5 +1,6 @@
 package com.example.kochbuch.storage;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -16,12 +17,17 @@ public interface BaseDao<T> {
     long insert(T insert);
 
     @Insert
-    List<Long> insert(T... inserts);
+    List<Long> insert(List<T> inserts);
 
     @Update
     void update(T... updates);
 
+    @Update
+    void update(List<T> updates);
+
+    @Delete
+    void delete(List<T> deletes);
+
     @Delete
     void delete(T... deletes);
-
 }

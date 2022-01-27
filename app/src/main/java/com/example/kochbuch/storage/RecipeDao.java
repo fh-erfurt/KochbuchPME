@@ -1,12 +1,16 @@
 package com.example.kochbuch.storage;
 
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Query;
+import androidx.room.Transaction;
+import androidx.room.Update;
 
-
-import com.example.kochbuch.enums.Foodtypes;
 import com.example.kochbuch.model.Recipe;
+import com.example.kochbuch.model.RecipeIngredient;
+import com.example.kochbuch.model.RecipeWithIngredient;
 
 import java.util.List;
 @Dao
@@ -18,18 +22,10 @@ public interface RecipeDao extends BaseDao<Recipe> {
     @Query("SELECT count(*) FROM Recipe")
     int count();
 
-    @Query("SELECT * from Recipe")
-    List<Recipe> getRecipes();
+    @Query("SELECT * FROM Recipe ORDER BY id")
+    LiveData<List<Recipe>> getRecipes();
 
-    @Query("SELECT * from Recipe ORDER BY id DESC LIMIT 1")
-    Recipe getLastEntry();
+    @Query("SELECT * FROM Recipe WHERE id=:recipeId")
+    LiveData<List<RecipeWithIngredient>> getRecipe(long recipeId);
 
-    @Query("SELECT * from Recipe WHERE id=:id1 ")
-    Recipe getEntryById(int id1);
-
-    @Query("SELECT * from Recipe WHERE favorite = 1")
-    List<Recipe> getFavorites();
-
-    @Query("SELECT * from Recipe WHERE foodtype = :fdt1")
-    List<Recipe> getByFoodtype(Foodtypes fdt1);
 }

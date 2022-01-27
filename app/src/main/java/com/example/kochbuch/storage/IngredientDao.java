@@ -23,5 +23,5 @@ public interface IngredientDao extends BaseDao<Ingredient>{
     Ingredient getLastEntry();
 
     @Query("SELECT * from Ingredient WHERE id=:id1 ")
-    Ingredient getEntryById(int id1);
+    Ingredient getEntryById(long id1);
 }

@@ -8,6 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.selection.ItemDetailsLookup;
+import androidx.recyclerview.selection.SelectionTracker;
+import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kochbuch.R;
@@ -16,7 +19,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.RecipeViewHolder> {
+public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.RecipeViewHolder>{
     public interface RecipeClickListener{
         void onClick(long recipeId);
     }
@@ -36,15 +39,35 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
                 recipeClickListener.onClick( this.currentRecipeId );
             });
         }
+
+        public ItemDetailsLookup.ItemDetails<Long> getItemDetails() {
+            return new ItemDetailsLookup.ItemDetails<Long>() {
+                @Override
+                public int getPosition() {
+                    return getAdapterPosition();
+                }
+
+                @Override
+                public Long getSelectionKey() {
+                    return getItemId();
+                }
+            };
+        }
     }
 
     private final LayoutInflater inflater;
-    private List<Recipe> recipeList;
     private final RecipeClickListener recipeClickListener;
+    private SelectionTracker<Long> selectionTracker;
 
     public RecipeListAdapter(Context context, RecipeClickListener recipeClickListener) {
+        super(new ListDiffCallback());
         this.inflater = LayoutInflater.from(context);
         this.recipeClickListener = recipeClickListener;
+        this.setHasStableIds( true );
+    }
+
+    public void setSelectionTracker(SelectionTracker<Long> selectionTracker) {
+        this.selectionTracker = selectionTracker;
     }
 
     @NonNull
@@ -56,34 +79,17 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Re
 
     @Override
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
-        if (this.recipeList != null && !this.recipeList.isEmpty()) {
-            Recipe current = this.recipeList.get(position);
+        Recipe current = this.getItem(position);
 
-            holder.currentRecipeId = current.getId();
-            holder.recipeName.setText(String.format("%s",current.getName()));
+        holder.currentRecipeId = current.getId();
+        holder.recipeName.setText(String.format("%s",current.getName()));
 
-            Picasso p = Picasso.get();
+        Picasso p = Picasso.get();
 
-            p.load(current.getPicturePath())
-                    .placeholder(R.drawable.recipe_preview_placeholder)
-                    .error(R.drawable.icon_error)
-                    .into( holder.recipeImage );
-        }
-        else {
-            // Covers the case of data not being ready yet.
-            holder.recipeName.setText(R.string.text_empty_list);
-        }
+        p.load(current.getPicturePath())
+                .placeholder(R.drawable.recipe_preview_placeholder)
+                .error(R.drawable.icon_error)
+                .into( holder.recipeImage );
     }
 
-    @Override
-    public int getItemCount() {
-        if( this.recipeList != null && !this.recipeList.isEmpty() )
-            return this.recipeList.size();
-        else
-            return 0;
-    }
-    public void setRecipeList(List<Recipe> recipeList){
-        this.recipeList = recipeList;
-        notifyDataSetChanged();
-    }
 }

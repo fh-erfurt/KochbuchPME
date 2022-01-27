@@ -18,7 +18,7 @@
         android:label="@string/title_Favorites"
         tools:layout="@layout/fragment_recipe_list" >
         <action
-            android:id="@+id/action_contact_list_to_contact_detail"
+            android:id="@+id/action_recipe_list_to_recipe_detail"
             app:destination="@id/navigation_recipe_detail"
             app:enterAnim="@anim/fragment_fade_enter"
             app:exitAnim="@anim/fragment_fade_exit"

@@ -3,22 +3,28 @@ package com.example.kochbuch.storage;
 import android.app.Application;
 import android.content.Context;
 
-import com.example.kochbuch.enums.Foodtypes;
-import com.example.kochbuch.model.Ingredient;
-import com.example.kochbuch.model.Recipe;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
-import java.util.ArrayList;
+import com.example.kochbuch.model.Recipe;
+import com.example.kochbuch.model.RecipeIngredient;
+import com.example.kochbuch.model.RecipeWithIngredient;
+
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 public class RecipeRepository {
 
     public static final  String LOG_TAG = "RecipeRepository";
     private final RecipeDao recipeDao;
+    private LiveData<List<Recipe>> allRecipes;
     private  static RecipeRepository INSTANCE;
 
-    public static RecipeRepository getRepository(Application application){
+
+    public static RecipeRepository getRepository( Application application ) {
         if( INSTANCE == null ) {
             synchronized ( RecipeRepository.class ) {
                 if( INSTANCE == null ) {
@@ -26,55 +32,15 @@ public class RecipeRepository {
                 }
             }
         }
-
         return INSTANCE;
     }
-
-    private RecipeRepository(Context context) {
-        CookbookDatabase db = CookbookDatabase.getDatabase(context);
+    private RecipeRepository( Context context ) {
+        CookbookDatabase db = CookbookDatabase.getDatabase( context );
         this.recipeDao = db.recipeDao();
     }
-
-    public List<Recipe> getRecipes(){
-        return this.query(()->this.recipeDao.getRecipes());
-    }
-
-    public List<Recipe> getFavorites() {
-        return this.query(()->this.recipeDao.getFavorites());
-    }
-
-    public List<Recipe> getByFoodtype(Foodtypes fdt){
-        return  this.query(()->this.recipeDao.getByFoodtype(fdt));
-    }
-
-    public void  deleteAllRecipes(){
-        this.recipeDao.deleteAll();
-    }
-
-    private List<Recipe> query( Callable<List<Recipe>> query )
-    {
+    public long insert(Recipe recipe){
         try {
-            return CookbookDatabase.executeWithReturn( query );
-        }
-        catch (ExecutionException | InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        return new ArrayList<>();
-    }
-
-    public void update(Recipe recipe) {
-        CookbookDatabase.execute( () -> recipeDao.update( this.prepareRecipeForWriting(recipe) ) );
-    }
-
-    public void insert(Recipe recipe) {
-        CookbookDatabase.execute( () -> recipeDao.insert( this.prepareRecipeForWriting(recipe) ) );
-    }
-
-    public long insertAndWait( Recipe recipe ) {
-
-        try {
-            return CookbookDatabase.executeWithReturn( () -> recipeDao.insert( this.prepareRecipeForWriting(recipe) ) );
+            return CookbookDatabase.executeWithReturn( () -> recipeDao.insert(recipe) );
         }
         catch (ExecutionException | InterruptedException e)
         {
@@ -84,13 +50,27 @@ public class RecipeRepository {
         return -1;
     }
 
-    private Recipe prepareRecipeForWriting( Recipe recipe ) {
-        if( recipe.getCreated() < 0 )
-            recipe.setCreated( System.currentTimeMillis() );
-
-        recipe.setModified( recipe.getCreated() );
-        recipe.setVersion( recipe.getVersion() + 1 );
-
-        return recipe;
+    public LiveData<List<Recipe>> getRecipes(){
+        this.allRecipes = this.queryLiveData(this.recipeDao::getRecipes);
+        return this.allRecipes;
     }
+
+    public LiveData<List<Recipe>> getRecipe(long recipeId){
+        LiveData<List<RecipeWithIngredient>> recipeWithIngredients = this.queryLiveData(()->this.recipeDao.getRecipe(recipeId));
+        return Transformations.map(recipeWithIngredients, input -> input.stream().map(RecipeWithIngredient::merge).collect(Collectors.toList()) );
+    }
+
+    private <T> LiveData<T> queryLiveData( Callable<LiveData<T>> query )
+    {
+        try {
+            return CookbookDatabase.executeWithReturn( query );
+        }
+        catch (ExecutionException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        // Well, is this a reasonable default return value?
+        return new MutableLiveData<>();
+    }
+
 }

@@ -38,6 +38,10 @@ public class IngredientRepository {
         return this.query(()->this.ingredientDao.getContacts());
     }
 
+    public Ingredient getIngredient(long id){
+        return this.ingredientDao.getEntryById(id);
+    }
+
     private List<Ingredient> query( Callable<List<Ingredient>> query )
     {
         try {

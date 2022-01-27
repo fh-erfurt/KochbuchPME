@@ -10,6 +10,8 @@ import com.example.kochbuch.enums.Foodtypes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+
 @Entity(tableName = "Recipe")
 public class Recipe extends Basemodel {
     // recipe Name
@@ -103,6 +105,16 @@ public class Recipe extends Basemodel {
 
     public void setIngredients(List<RecipeIngredient> ingredients) {
         this.ingredients = ingredients;
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Recipe recipe = (Recipe) o;
+        return name.equals(recipe.name) &&
+                instruction.equals(recipe.instruction) &&
+                picturePath.equals(recipe.picturePath);
     }
 
     public boolean isFavorite() {

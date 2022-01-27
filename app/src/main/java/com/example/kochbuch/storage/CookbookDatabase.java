@@ -34,7 +34,6 @@ public abstract class CookbookDatabase extends RoomDatabase {
      */
     public abstract RecipeDao recipeDao();
     public abstract IngredientDao ingredientDao();
-    public abstract RecipeIngredientDao recipeIngredientDao();
     /*
         Executor service to perform database operations asynchronous and independent from UI thread
      */

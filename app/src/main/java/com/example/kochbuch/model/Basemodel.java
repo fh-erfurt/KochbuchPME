@@ -9,7 +9,7 @@ public abstract class Basemodel {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    private int id = 0;
+    private long id = 0;
 
     @NonNull
     @ColumnInfo(name = "created")
@@ -23,10 +23,10 @@ public abstract class Basemodel {
     @ColumnInfo(name = "version")
     private int version = 0;
 
-    public int getId() {
+    public long getId() {
         return id;
     }
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
