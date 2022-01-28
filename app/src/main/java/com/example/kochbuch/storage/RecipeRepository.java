@@ -5,13 +5,16 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 
 import com.example.kochbuch.model.Recipe;
 import com.example.kochbuch.model.RecipeIngredient;
+import com.example.kochbuch.model.RecipeIngredientIngredient;
 
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
 
 public class RecipeRepository {
 
@@ -20,7 +23,7 @@ public class RecipeRepository {
     private final RecipeIngredientDao recipeIngredientDao;
     private LiveData<List<Recipe>> allRecipes;
     private  static RecipeRepository INSTANCE;
-
+    private LiveData<List<RecipeIngredient>> recipeIngredients;
 
     public static RecipeRepository getRepository( Application application ) {
         if( INSTANCE == null ) {
@@ -108,6 +111,15 @@ public class RecipeRepository {
     }
 
     public LiveData<List<RecipeIngredient>> getRecipeIngredients(long recipeId) {
-        return this.queryLiveData(()->this.recipeIngredientDao.getRecipeIngredients(recipeId));
+        this.recipeIngredients = Transformations.map(queryLiveData(()->this.recipeIngredientDao.getRecipeIngredientsWithIngredient(recipeId)),
+                input -> input
+                        .stream()
+                        .map(RecipeIngredientIngredient::merge)
+                        .collect(Collectors.toList()));
+        return this.recipeIngredients;
+        //return this.queryLiveData(()->this.recipeIngredientDao.getRecipeIngredients(recipeId));
     }
+
+
+
 }

@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -27,7 +29,7 @@ public class RecipeDetailFragment extends BaseFragment {
     private LiveData<Recipe> recipeLiveData;
     private Button btnFavorite;
     private LiveData<List<RecipeIngredient>> recipeIngredientsLiveData;
-    private LiveData<List<Ingredient>> ingredientsLiveData;
+    private TableLayout ingredientTable;
 
     // TODO either a dynamic Table or a RecylerView for ingredients
 
@@ -57,34 +59,51 @@ public class RecipeDetailFragment extends BaseFragment {
         long recipeId = getArguments().getLong(ARG_RECIPE_ID);
         this.recipeLiveData = viewModel.getRecipe(recipeId);
         this.recipeIngredientsLiveData = viewModel.getRecipeIngredients(recipeId);
-        this.ingredientsLiveData = viewModel.getIngredients(recipeId);
 
         this.recipeIngredientsLiveData.observe(requireActivity(),this::updateViewRI);
-        this.ingredientsLiveData.observe(requireActivity(),this::updateViewI);
         this.recipeLiveData.observe(requireActivity(),this::updateView);
 
     }
     // update for ri TODO wenn zusammengefasst kann als recyclerview benutzt werden
     private void updateViewRI(List<RecipeIngredient> recipeIngredients) {
+        assert getView() != null;
+        System.out.println("size of array "+recipeIngredients.size());
+        this.ingredientTable = getView().findViewById(R.id.ingredient_table);
+        this.ingredientTable.setStretchAllColumns(true);
+        this.ingredientTable.bringToFront();
         for (RecipeIngredient ri:recipeIngredients) {
-            System.out.println(ri.getIngredientId());
+            //System.out.println(ri.getIngredientId()+" "+ri.getIngredient().getName());
+            // name
+            TableRow tableRow = new TableRow(this.getContext());
+
+            TextView txtName = new TextView(this.getContext());
+            txtName.setTextSize(12);
+            txtName.setText(String.format("%s",ri.getIngredient().getName()));
+            tableRow.addView(txtName);
+            // gramm
+            TextView txtGramm = new TextView(this.getContext());
+            txtGramm.setTextSize(12);
+            txtGramm.setText(String.format("%s Gramm",ri.getQuantityInG()));
+            tableRow.addView(txtGramm);
+            // kcal 100
+            TextView txtkcal100 = new TextView(this.getContext());
+            txtkcal100.setTextSize(12);
+            txtkcal100.setText(String.format("%s kcal",ri.getIngredient().getKcal100()));
+            tableRow.addView(txtkcal100);
+            // kcal erechnet
+            TextView txtkcal = new TextView(this.getContext());
+            txtkcal.setTextSize(12);
+            txtkcal.setText(String.format("%s kcal",(double)ri.getQuantityInG()/100*ri.getIngredient().getKcal100()));
+            tableRow.addView(txtkcal);
+            this.ingredientTable.addView(tableRow);
         }
     }
-    // update for ingredients
-    private void updateViewI(List<Ingredient> ingredients) {
-        for (Ingredient i: ingredients) {
-            System.out.println(i.getName()+" kcal:"+i.getKcal100());
-        }
-    }
-
-
 
     @Override
     public void onPause() {
         super.onPause();
         this.recipeLiveData.removeObservers(requireActivity());
         this.recipeIngredientsLiveData.removeObservers(requireActivity());
-        this.ingredientsLiveData.removeObservers(requireActivity());
     }
 
     // main function for everything in the RecipeDetailView
@@ -97,8 +116,6 @@ public class RecipeDetailFragment extends BaseFragment {
         ImageView recipeImage = getView().findViewById( R.id.fragment_recipe_detail_image );
         TextView descriptionView = getView().findViewById(R.id.fragment_recipe_detail_description);
 
-        // gets the first element of the Recipe List because it is implemented that only the first element is actually filled
-        // TODO: here all the Ingredient Data should be attached (not yet tested)
         System.out.println(recipe);
         // sets the Text elements of the xml file
         titleView.setText(String.format("%s",recipe.getName()));

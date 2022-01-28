@@ -39,7 +39,6 @@ public class FavoriteRecipeListFragment extends BaseFragment {
         // inflate to view fragment_recipe_list
         this.recipeListViewModel = this.getViewModel(RecipeListViewModel.class);
         View root = inflater.inflate(R.layout.fragment_recipe_list, container, false);
-        System.out.println("generating testdata");
 
         // configure Recycler View
         RecyclerView recipeListView = root.findViewById(R.id.list_view_recipes);

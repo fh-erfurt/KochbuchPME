@@ -21,13 +21,6 @@ public class RecipeListViewModel extends AndroidViewModel {
         super(application);
         this.recipeRepository = RecipeRepository.getRepository(application);
     }
-    // recipe Testdata can be generated here RecipeIngredient and Ingredient Lists have to be handled separate
-    public long genTestData(){
-        //this.recipeRepository.deleteAll();
-        Recipe recipe = new Recipe("Test1","cook for 59sec","1min noodles", Foodtypes.VEGETARIAN);
-        recipe.setFavorite(true);
-        return this.recipeRepository.insert(recipe);
-    }
 
     public LiveData<List<Recipe>> getRecipes(){
         return this.recipeRepository.getRecipes();
