@@ -17,9 +17,12 @@ public class Ingredient extends Basemodel {
 
     @NonNull
     @ColumnInfo(name = "kcal100")
-    private int kcal;
+    private int kcal100;
 
-
+    public Ingredient(String name,int kcal100){
+        this.name = name;
+        this.kcal100 = kcal100;
+    }
 
     public String getName(){
         return this.name;
@@ -28,12 +31,12 @@ public class Ingredient extends Basemodel {
         this.name = newName;
     }
 
-    public void setKcal(int kcal) {
-        this.kcal = kcal;
+    public void setKcal100(int kcal100) {
+        this.kcal100 = kcal100;
     }
 
-    public int getKcal() {
-        return kcal;
+    public int getKcal100() {
+        return kcal100;
     }
 
     @NonNull

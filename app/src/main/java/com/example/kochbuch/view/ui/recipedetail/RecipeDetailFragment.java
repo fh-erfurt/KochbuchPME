@@ -13,7 +13,9 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
 import com.example.kochbuch.R;
+import com.example.kochbuch.model.Ingredient;
 import com.example.kochbuch.model.Recipe;
+import com.example.kochbuch.model.RecipeIngredient;
 import com.example.kochbuch.view.ui.core.BaseFragment;
 import com.squareup.picasso.Picasso;
 
@@ -22,8 +24,10 @@ import java.util.List;
 public class RecipeDetailFragment extends BaseFragment {
     public static final String ARG_RECIPE_ID = "recipeId";
     private RecipeDetailViewModel viewModel;
-    private LiveData<List<Recipe>> recipeLiveData;
+    private LiveData<Recipe> recipeLiveData;
     private Button btnFavorite;
+    private LiveData<List<RecipeIngredient>> recipeIngredientsLiveData;
+    private LiveData<List<Ingredient>> ingredientsLiveData;
 
     // TODO either a dynamic Table or a RecylerView for ingredients
 
@@ -52,19 +56,41 @@ public class RecipeDetailFragment extends BaseFragment {
         assert getArguments() != null;
         long recipeId = getArguments().getLong(ARG_RECIPE_ID);
         this.recipeLiveData = viewModel.getRecipe(recipeId);
+        this.recipeIngredientsLiveData = viewModel.getRecipeIngredients(recipeId);
+        this.ingredientsLiveData = viewModel.getIngredients(recipeId);
+
+        this.recipeIngredientsLiveData.observe(requireActivity(),this::updateViewRI);
+        this.ingredientsLiveData.observe(requireActivity(),this::updateViewI);
         this.recipeLiveData.observe(requireActivity(),this::updateView);
+
     }
+    // update for ri TODO wenn zusammengefasst kann als recyclerview benutzt werden
+    private void updateViewRI(List<RecipeIngredient> recipeIngredients) {
+        for (RecipeIngredient ri:recipeIngredients) {
+            System.out.println(ri.getIngredientId());
+        }
+    }
+    // update for ingredients
+    private void updateViewI(List<Ingredient> ingredients) {
+        for (Ingredient i: ingredients) {
+            System.out.println(i.getName()+" kcal:"+i.getKcal100());
+        }
+    }
+
+
 
     @Override
     public void onPause() {
         super.onPause();
         this.recipeLiveData.removeObservers(requireActivity());
-
+        this.recipeIngredientsLiveData.removeObservers(requireActivity());
+        this.ingredientsLiveData.removeObservers(requireActivity());
     }
+
     // main function for everything in the RecipeDetailView
-    private void updateView(List<Recipe> recipeList) {
+    private void updateView(Recipe recipe) {
         assert getView() != null;
-        assert recipeList != null;
+        assert recipe != null;
         // gets the elements in the Detail View
         TextView titleView = getView().findViewById( R.id.fragment_recipe_detail_textViewTitle );
         TextView instructionView = getView().findViewById( R.id.fragment_recipe_detail_instruction );
@@ -73,7 +99,7 @@ public class RecipeDetailFragment extends BaseFragment {
 
         // gets the first element of the Recipe List because it is implemented that only the first element is actually filled
         // TODO: here all the Ingredient Data should be attached (not yet tested)
-        Recipe recipe = recipeList.get(0);
+        System.out.println(recipe);
         // sets the Text elements of the xml file
         titleView.setText(String.format("%s",recipe.getName()));
         instructionView.setText(String.format("%s",recipe.getInstruction()));
@@ -100,6 +126,10 @@ public class RecipeDetailFragment extends BaseFragment {
         }else{
             btnFavorite.setText(String.format("%s","merken"));
         }
+
+
+
+
 
         Picasso p = Picasso.get();
 

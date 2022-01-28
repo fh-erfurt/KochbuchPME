@@ -1,7 +1,9 @@
 package com.example.kochbuch.storage;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
 import com.example.kochbuch.model.Ingredient;
 import com.example.kochbuch.model.Recipe;
@@ -16,12 +18,14 @@ public interface IngredientDao extends BaseDao<Ingredient>{
     @Query("SELECT count(*) FROM Ingredient")
     int count();
 
-    @Query("SELECT * from Ingredient")
-    List<Ingredient> getContacts();
+    @Query("SELECT * FROM Ingredient")
+    LiveData<List<Ingredient>> getIngredients();
 
-    @Query("SELECT * from Ingredient ORDER BY id DESC LIMIT 1")
-    Ingredient getLastEntry();
-
+    @Transaction
     @Query("SELECT * from Ingredient WHERE id=:id1 ")
-    Ingredient getEntryById(long id1);
+    LiveData<Ingredient> getIngredient(long id1);
+
+    @Transaction
+    @Query("SELECT i.id,i.created,i.modified,i.version,i.name,i.kcal100 FROM Ingredient as i JOIN RecipeIngredient as ri ON i.id = ri.ingredientId WHERE ri.recipeId = :recipeId")
+    LiveData<List<Ingredient>> getIngredients(long recipeId);
 }

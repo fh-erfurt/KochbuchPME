@@ -11,11 +11,11 @@ public class RecipeIngredient extends Basemodel {
 
     @NonNull
     @ColumnInfo(name = "ingredientId")
-    private int ingredientId;
+    private long ingredientId;
 
     @NonNull
     @ColumnInfo(name = "recipeId")
-    private int recipeId;
+    private long recipeId;
 
     @NonNull
     @ColumnInfo(name = "quantityInG")
@@ -24,6 +24,14 @@ public class RecipeIngredient extends Basemodel {
     @Ignore
     private Ingredient ingredient;
 
+    public RecipeIngredient(){
+
+    }
+
+    public RecipeIngredient(int quantityInG,Ingredient ingredient){
+        this.quantityInG = quantityInG;
+        this.ingredient = ingredient;
+    }
 
     @NonNull
     @Override
@@ -31,19 +39,19 @@ public class RecipeIngredient extends Basemodel {
         return null;
     }
 
-    public int getIngredientId() {
+    public long getIngredientId() {
         return ingredientId;
     }
 
-    public void setIngredientId(int ingredientId) {
+    public void setIngredientId(long ingredientId) {
         this.ingredientId = ingredientId;
     }
 
-    public int getRecipeId() {
+    public long getRecipeId() {
         return recipeId;
     }
 
-    public void setRecipeId(int recipeId) {
+    public void setRecipeId(long recipeId) {
         this.recipeId = recipeId;
     }
 

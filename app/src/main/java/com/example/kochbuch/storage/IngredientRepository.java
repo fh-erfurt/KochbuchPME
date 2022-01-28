@@ -4,6 +4,9 @@ package com.example.kochbuch.storage;
 import android.app.Application;
 import android.content.Context;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.kochbuch.model.Ingredient;
 
 import java.util.ArrayList;
@@ -34,15 +37,19 @@ public class IngredientRepository {
         this.ingredientDao = db.ingredientDao();
     }
 
-    public List<Ingredient> getIngredients(){
-        return this.query(()->this.ingredientDao.getContacts());
+    public LiveData<List<Ingredient>> getIngredients(){
+        return this.queryLiveData(this.ingredientDao::getIngredients);
     }
 
-    public Ingredient getIngredient(long id){
-        return this.ingredientDao.getEntryById(id);
+    public LiveData<List<Ingredient>> getIngredients(long recipeId){
+        return this.queryLiveData(()->this.ingredientDao.getIngredients(recipeId));
     }
 
-    private List<Ingredient> query( Callable<List<Ingredient>> query )
+    public LiveData<Ingredient> getIngredient(long id){
+        return this.queryLiveData(()->this.ingredientDao.getIngredient(id));
+    }
+
+    private <T> LiveData<T> queryLiveData(Callable<LiveData<T>> query )
     {
         try {
             return CookbookDatabase.executeWithReturn( query );
@@ -51,18 +58,19 @@ public class IngredientRepository {
             e.printStackTrace();
         }
 
-        return new ArrayList<>();
+        // Well, is this a reasonable default return value?
+        return new MutableLiveData<>();
     }
 
     public void update(Ingredient ingredient) {
         CookbookDatabase.execute( () -> ingredientDao.update( this.prepareIngredientForWriting(ingredient) ) );
     }
 
-    public void insert(Ingredient ingredient) {
-        CookbookDatabase.execute( () -> ingredientDao.insert( this.prepareIngredientForWriting(ingredient) ) );
+    public void deleteAll(){
+        CookbookDatabase.execute(ingredientDao::deleteAll);
     }
 
-    public long insertAndWait( Ingredient ingredient ) {
+    public long insert( Ingredient ingredient ) {
 
         try {
             return CookbookDatabase.executeWithReturn( () -> ingredientDao.insert( this.prepareIngredientForWriting(ingredient) ) );

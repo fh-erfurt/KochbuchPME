@@ -28,15 +28,15 @@ public class RecipeRepositoryTest extends TestCase {
 
     @Test
     public void insertTest(){
-        Recipe recipe = new Recipe("Test1","cook ad 100 Degrees","doesn not taste good");
-        long id = recipeRepository.insertAndWait(recipe);
+        /*Recipe recipe = new Recipe("Test1","cook ad 100 Degrees","doesn not taste good");
+        long id = recipeRepository.insert(recipe);
         System.out.println("inserted Id:" + id);
 
-        List<Recipe> entrys = recipeRepository.getIngredients();
+        //List<Recipe> entrys = recipeRepository.getIngredients();
 
         for (Recipe entry:entrys) {
             System.out.println(entry.getName()+" "+entry.getDescription()+" "+entry.getInstruction());
-        }
+        }*/
     }
 
     public void tearDown() throws Exception {

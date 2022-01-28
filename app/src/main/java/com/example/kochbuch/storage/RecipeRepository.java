@@ -5,21 +5,19 @@ import android.content.Context;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Transformations;
 
 import com.example.kochbuch.model.Recipe;
 import com.example.kochbuch.model.RecipeIngredient;
-import com.example.kochbuch.model.RecipeWithIngredient;
 
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
-import java.util.stream.Collectors;
 
 public class RecipeRepository {
 
     public static final  String LOG_TAG = "RecipeRepository";
     private final RecipeDao recipeDao;
+    private final RecipeIngredientDao recipeIngredientDao;
     private LiveData<List<Recipe>> allRecipes;
     private  static RecipeRepository INSTANCE;
 
@@ -37,10 +35,23 @@ public class RecipeRepository {
     private RecipeRepository( Context context ) {
         CookbookDatabase db = CookbookDatabase.getDatabase( context );
         this.recipeDao = db.recipeDao();
+        this.recipeIngredientDao = db.recipeIngredientDao();
     }
     public long insert(Recipe recipe){
         try {
             return CookbookDatabase.executeWithReturn( () -> recipeDao.insert(recipe) );
+        }
+        catch (ExecutionException | InterruptedException e)
+        {
+            e.printStackTrace();
+        }
+
+        return -1;
+    }
+
+    public long insert(RecipeIngredient recipeIngredient){
+        try {
+            return CookbookDatabase.executeWithReturn( () -> recipeIngredientDao.insert(recipeIngredient) );
         }
         catch (ExecutionException | InterruptedException e)
         {
@@ -55,14 +66,9 @@ public class RecipeRepository {
         return this.allRecipes;
     }
 
-    public LiveData<List<Recipe>> getRecipe(long recipeId){
-        LiveData<List<RecipeWithIngredient>> recipeWithIngredients = this.queryLiveData(()->this.recipeDao.getRecipe(recipeId));
-        // we get the LifeData as RecipeWithIngredient List because there are multiple Ingredients in a recipe
-        // that's why we have to map the RecipeIngredient Objects to the Recipe Objects
-        // for that we use the function: merge() defined in RecipeWithIngredient
-        // finally we return a List with one object in it: the Recipe filled with all the ingredient references
-        // to actually get all the ingredients we have to manually get them later via the reference ids
-        return Transformations.map(recipeWithIngredients, input -> input.stream().map(RecipeWithIngredient::merge).collect(Collectors.toList()) );
+    public LiveData<Recipe> getRecipe(long recipeId){
+        LiveData<Recipe> recipe = this.queryLiveData(()->this.recipeDao.getRecipe(recipeId));
+        return recipe;
     }
 
     public LiveData<List<Recipe>> getFavorites(){
@@ -73,9 +79,10 @@ public class RecipeRepository {
         CookbookDatabase.execute(()->recipeDao.update(this.prepareContactForWriting(recipe)));
     }
 
-    public void deleteAll(){
+    public void deleteAllRecipes(){
         CookbookDatabase.execute(recipeDao::deleteAll);
     }
+    public void deleteAllRecipeIngredients(){ CookbookDatabase.execute(recipeIngredientDao::deleteAll);}
 
     private <T> LiveData<T> queryLiveData( Callable<LiveData<T>> query )
     {
@@ -100,4 +107,7 @@ public class RecipeRepository {
         return recipe;
     }
 
+    public LiveData<List<RecipeIngredient>> getRecipeIngredients(long recipeId) {
+        return this.queryLiveData(()->this.recipeIngredientDao.getRecipeIngredients(recipeId));
+    }
 }

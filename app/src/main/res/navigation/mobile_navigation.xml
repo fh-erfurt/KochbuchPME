@@ -9,7 +9,7 @@
         android:id="@+id/navigation_input"
         android:name="com.example.kochbuch.view.ui.input.InputFragment"
         android:label="@string/input"
-        tools:layout="@layout/input_recipe" />
+        tools:layout="@layout/fragment_input" />
 
 
     <fragment
