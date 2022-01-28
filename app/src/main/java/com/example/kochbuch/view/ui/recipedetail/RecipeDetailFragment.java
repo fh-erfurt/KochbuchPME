@@ -71,6 +71,7 @@ public class RecipeDetailFragment extends BaseFragment {
         this.ingredientTable = getView().findViewById(R.id.ingredient_table);
         this.ingredientTable.setStretchAllColumns(true);
         this.ingredientTable.bringToFront();
+        this.ingredientTable.removeAllViews();
         for (RecipeIngredient ri:recipeIngredients) {
             //System.out.println(ri.getIngredientId()+" "+ri.getIngredient().getName());
             // name
