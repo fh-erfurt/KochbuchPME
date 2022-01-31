@@ -5,73 +5,103 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="241dp"
-        android:layout_height="59dp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="210dp">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="239dp"
-            android:layout_height="58dp"
-            android:hint="hint" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <EditText
-        android:id="@+id/editTextNumber"
-        android:layout_width="114dp"
-        android:layout_height="59dp"
-        android:layout_marginStart="24dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textInputLayout"
-        tools:layout_editor_absoluteY="210dp" />
-
     <Button
-        android:id="@+id/button"
-        android:layout_width="59dp"
-        android:layout_height="42dp"
-        android:layout_marginBottom="20dp"
+        android:id="@+id/button_input_ingredient"
+        android:layout_width="116dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:onClick="onClick_save_ingredient"
         android:text="@string/plus"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNumber"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.911"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_input_ingredient_weight" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_input_recipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="44dp"
+        android:layout_marginBottom="60dp"
+        android:onClick="onClick_save_recipe"
         android:text="@string/speichern"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.902"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_input_recipe_description"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
-        android:layout_width="335dp"
-        android:layout_height="176dp"
+        android:id="@+id/edit_input_ingredient_name"
+        android:layout_width="212dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        tools:layout_editor_absoluteX="28dp"
-        tools:layout_editor_absoluteY="296dp" />
+        android:hint="@string/input_ingredient_name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/edit_input_ingredient_weight"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_input_recipe_name" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine2"
-        android:layout_width="338dp"
-        android:layout_height="118dp"
+        android:id="@+id/edit_input_recipe_name"
+        android:layout_width="378dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/input_recipe_name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <EditText
+        android:id="@+id/edit_input_ingredient_weight"
+        android:layout_width="132dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:hint="@string/input_ingredient_weight"
+        android:inputType="numberDecimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_input_recipe_name" />
+
+    <EditText
+        android:id="@+id/edit_input_recipe_instruction"
+        android:layout_width="377dp"
+        android:layout_height="190dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="84dp"
+        android:layout_marginEnd="16dp"
         android:ems="10"
         android:gravity="start|top"
+        android:hint="@string/input_recipe_instruction"
         android:inputType="textMultiLine"
-        tools:layout_editor_absoluteX="26dp"
-        tools:layout_editor_absoluteY="479dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_input_ingredient_name" />
+
+    <EditText
+        android:id="@+id/edit_input_recipe_description"
+        android:layout_width="379dp"
+        android:layout_height="93dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:hint="@string/input_recipe_description"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_input_recipe_instruction" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
