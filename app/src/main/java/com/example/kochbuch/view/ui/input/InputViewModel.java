@@ -30,7 +30,11 @@ public class InputViewModel extends AndroidViewModel {
         for (RecipeIngredient ri: recipe.getIngredients()) {
             ri.setRecipeId(recipeId);
             Ingredient ingredient = ri.getIngredient();
-            long ingredientId = this.ingredientRepository.insert(ingredient);
+            System.out.println("ingredient Id" + ingredient.getId());
+            long ingredientId = ingredient.getId();
+            if(ingredientId == 0){
+                ingredientId = this.ingredientRepository.insert(ingredient);
+            }
             ri.setIngredientId(ingredientId);
             this.recipeRepository.insert(ri);
         }
