@@ -30,4 +30,15 @@ public interface RecipeDao extends BaseDao<Recipe> {
     @Query("SELECT * FROM Recipe WHERE favorite = 1")
     LiveData<List<Recipe>> getFavorites();
 
+    @Transaction
+    @Query("SELECT * FROM Recipe WHERE foodtype = 'VEGETARIAN'")
+    LiveData<List<Recipe>> getVegetarian();
+
+    @Transaction
+    @Query("SELECT * FROM Recipe WHERE foodtype = 'OMNIVORE'")
+    LiveData<List<Recipe>> getOmnivore();
+
+    @Transaction
+    @Query("SELECT * FROM Recipe WHERE foodtype = 'VEGAN'")
+    LiveData<List<Recipe>> getVegan();
 }

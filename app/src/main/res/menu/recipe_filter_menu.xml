@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/select_favorites"
+        android:title="@string/favoriten"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/select_vegetarian"
+        android:title="@string/vegetarian"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/select_meat"
+        android:title="@string/meat"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/select_vegan"
+        android:title="@string/vegan"
+        app:showAsAction="never"/>
+</menu>

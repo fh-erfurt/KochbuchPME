@@ -121,5 +121,15 @@ public class RecipeRepository {
     }
 
 
+    public LiveData<List<Recipe>> getVegetarian() {
+        return this.queryLiveData(this.recipeDao::getVegetarian);
+    }
 
+    public LiveData<List<Recipe>> getOmnivore() {
+        return this.queryLiveData(this.recipeDao::getOmnivore);
+    }
+
+    public LiveData<List<Recipe>> getVegan() {
+        return this.queryLiveData(this.recipeDao::getVegan);
+    }
 }

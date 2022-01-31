@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -32,6 +33,8 @@ import java.util.List;
 
 public class FavoriteRecipeListFragment extends BaseFragment {
     private RecipeListViewModel recipeListViewModel;
+    private LiveData<List<Recipe>> recipes;
+    private RecipeListAdapter adapter;
     //Start Screen of the app
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState){
@@ -44,7 +47,7 @@ public class FavoriteRecipeListFragment extends BaseFragment {
         RecyclerView recipeListView = root.findViewById(R.id.list_view_recipes);
 
         // view adapter
-        final RecipeListAdapter adapter = new RecipeListAdapter(this.requireActivity(),
+        this.adapter = new RecipeListAdapter(this.requireActivity(),
                 recipeId -> {
                     Bundle args = new Bundle();
                     args.putLong("recipeId", recipeId);
@@ -52,10 +55,56 @@ public class FavoriteRecipeListFragment extends BaseFragment {
                     nc.navigate( R.id.action_recipe_list_to_recipe_detail , args );
                 });
 
-        recipeListView.setAdapter(adapter);
+        recipeListView.setAdapter(this.adapter);
         recipeListView.setLayoutManager(new LinearLayoutManager(this.requireActivity()));
+        this.recipes = recipeListViewModel.getRecipes();
 
-        recipeListViewModel.getFavorites().observe(this.requireActivity(), adapter::submitList);
+        this.recipes.observe(this.requireActivity(), this.adapter::submitList);
+
+
         return root;
     }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        inflater.inflate(R.menu.recipe_filter_menu,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        this.recipes.removeObservers(this.requireActivity());
+
+        switch(item.getItemId()){
+            case R.id.select_favorites:
+                System.out.println("this is favorites");
+                this.recipes = recipeListViewModel.getFavorites();
+                break;
+            case R.id.select_vegetarian:
+                System.out.println("this is vegetarisch");
+                this.recipes = recipeListViewModel.getVegetarian();
+                break;
+            case R.id.select_meat:
+                System.out.println("this is meat");
+                this.recipes = recipeListViewModel.getOmnivore();
+                break;
+            case R.id.select_vegan:
+                System.out.println("this is vegan");
+                this.recipes = recipeListViewModel.getVegan();
+                break;
+        }
+        this.recipes.observe(this.requireActivity(),this.adapter::submitList);
+        return true;
+        //return super.onOptionsItemSelected(item);
+    }
+
+
 }

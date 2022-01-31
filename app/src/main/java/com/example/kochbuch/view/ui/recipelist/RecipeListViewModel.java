@@ -30,4 +30,15 @@ public class RecipeListViewModel extends AndroidViewModel {
         return this.recipeRepository.getFavorites();
     }
 
+    public LiveData<List<Recipe>> getVegetarian() {
+        return this.recipeRepository.getVegetarian();
+    }
+
+    public LiveData<List<Recipe>> getOmnivore() {
+        return this.recipeRepository.getOmnivore();
+    }
+
+    public LiveData<List<Recipe>> getVegan() {
+        return this.recipeRepository.getVegan();
+    }
 }
