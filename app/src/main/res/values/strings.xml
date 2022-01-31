@@ -10,4 +10,10 @@
     <string name="input">addNewRecipe</string>
     <string name="speichern">speichern</string>
     <string name="plus">+</string>
+    <string name="input_recipe_name">Rezept name</string>
+    <string name="input_ingredient_name">Ingredient</string>
+    <string name="input_ingredient_weight">Gramm</string>
+    <string name="input_recipe_instruction">Instruktion</string>
+    <string name="input_recipe_description">Bezeichnung</string>
+
 </resources>
