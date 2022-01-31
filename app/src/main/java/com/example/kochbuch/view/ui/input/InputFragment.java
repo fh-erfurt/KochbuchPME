@@ -58,6 +58,9 @@ public class InputFragment extends BaseFragment {
     // "main" methode
     // hier ist die ingredient Liste verfügbar
     private void updateView(List<Ingredient> ingredients){
+        // ingredient liste
+        // ingredients = Liste aller in der Datenbank vorhandenen Zutaten
+
 
 
     }

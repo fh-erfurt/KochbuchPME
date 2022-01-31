@@ -81,33 +81,4 @@ public abstract class CookbookDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
-
-    /*
-        Create DB Callback
-        Used to add some initial data
-     */
-    /*private static final RoomDatabase.Callback createCallback = new RoomDatabase.Callback() {
-        @Override
-        public void onCreate(@NonNull SupportSQLiteDatabase db) {
-            super.onCreate(db);
-
-            Log.i( LOG_TAG_DB, "onCreate() called" );
-
-            execute(() -> {
-                ContactDao dao = INSTANCE.contactDao();
-                dao.deleteAll();
-
-                Faker faker = Faker.instance();
-                for (int i = 0; i < 10; i++)
-                {
-                    Contact contact = new Contact(faker.name().lastName(), faker.name().firstName());
-                    contact.setCreated( System.currentTimeMillis() );
-                    contact.setModified( contact.getCreated() );
-                    contact.setVersion( 1 );
-                    dao.insert(contact);
-                }
-                Log.i(LOG_TAG_DB, "Inserted 10 values to DB");
-            });
-        }
-    };*/
 }
