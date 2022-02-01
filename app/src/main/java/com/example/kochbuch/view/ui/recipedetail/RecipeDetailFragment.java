@@ -94,7 +94,7 @@ public class RecipeDetailFragment extends BaseFragment {
             // kcal erechnet
             TextView txtkcal = new TextView(this.getContext());
             txtkcal.setTextSize(12);
-            txtkcal.setText(String.format("%s kcal",(double)ri.getQuantityInG()/100*ri.getIngredient().getKcal100()));
+            txtkcal.setText(String.format("%s kcal",((double)ri.getQuantityInG()/100*ri.getIngredient().getKcal100())));
             tableRow.addView(txtkcal);
             this.ingredientTable.addView(tableRow);
         }
