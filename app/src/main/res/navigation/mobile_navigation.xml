@@ -20,22 +20,22 @@
         <action
             android:id="@+id/action_recipe_list_to_recipe_detail"
             app:destination="@id/navigation_recipe_detail"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit"
+            app:enterAnim="@animator/fragment_fade_enter"
+            app:exitAnim="@animator/fragment_fade_exit"
             app:launchSingleTop="false"
             app:popUpToInclusive="false" />
     </fragment>
 
     <fragment
         android:id="@+id/navigation_browse"
-        android:name="com.example.kochbuch.view.ui.browse.BrowseFragment"
+        android:name="com.example.kochbuch.view.ui.browse.OptionsFragment"
         android:label="@string/title_browse"
         tools:layout="@layout/fragment_recipe_list">
         <action
             android:id="@+id/action_recipe_list_to_recipe_detail"
             app:destination="@id/navigation_recipe_detail"
-            app:enterAnim="@anim/fragment_fade_enter"
-            app:exitAnim="@anim/fragment_fade_exit"
+            app:enterAnim="@animator/fragment_fade_enter"
+            app:exitAnim="@animator/fragment_fade_exit"
             app:launchSingleTop="false"
             app:popUpToInclusive="false" />
     </fragment>

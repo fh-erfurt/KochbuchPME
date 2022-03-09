@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory app:title="User Interface" />
+    <SwitchPreferenceCompat
+        app:key="dark_mode"
+        app:icon="@drawable/ic_baseline_dark_mode_24"
+        app:title="Enable Dark Mode"/>
+</PreferenceScreen>
