@@ -19,5 +19,7 @@
     <string name="vegetarian">Vegetarisch</string>
     <string name="meat">Fleisch</string>
     <string name="vegan">Vegan</string>
+    <string name="title_settings">settings</string>
+    <string name="title_recipe_pager">recipePager</string>
 
 </resources>

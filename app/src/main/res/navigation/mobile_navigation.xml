@@ -19,7 +19,7 @@
         tools:layout="@layout/fragment_recipe_list" >
         <action
             android:id="@+id/action_recipe_list_to_recipe_detail"
-            app:destination="@id/navigation_recipe_detail"
+            app:destination="@id/navigation_recipe_pager"
             app:enterAnim="@animator/fragment_fade_enter"
             app:exitAnim="@animator/fragment_fade_exit"
             app:launchSingleTop="false"
@@ -27,17 +27,19 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_browse"
-        android:name="com.example.kochbuch.view.ui.browse.OptionsFragment"
-        android:label="@string/title_browse"
-        tools:layout="@layout/fragment_recipe_list">
-        <action
-            android:id="@+id/action_recipe_list_to_recipe_detail"
-            app:destination="@id/navigation_recipe_detail"
-            app:enterAnim="@animator/fragment_fade_enter"
-            app:exitAnim="@animator/fragment_fade_exit"
-            app:launchSingleTop="false"
-            app:popUpToInclusive="false" />
+        android:id="@+id/navigation_settings"
+        android:name="com.example.kochbuch.view.ui.settings.SettingsFragment"
+        android:label="@string/title_settings"
+        tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/navigation_recipe_pager"
+        android:name="com.example.kochbuch.view.ui.recipepager.RecipePagerFragment"
+        android:label="@string/title_recipe_pager"
+        tools:layout="@layout/fragment_recipe_pager">
+        <argument
+            android:name="recipeId"
+            app:argType="long" />
     </fragment>
 
     <fragment

@@ -9,6 +9,6 @@
         android:title="@string/title_Favorites" />
 
     <item
-        android:id="@+id/navigation_browse"
-        android:title="@string/title_browse" />
+        android:id="@+id/navigation_settings"
+        android:title="@string/title_settings" />
 </menu>

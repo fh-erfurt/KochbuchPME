@@ -91,5 +91,13 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
                 .error(R.drawable.icon_error)
                 .into( holder.recipeImage );*/
     }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
+    public Recipe getRecipe( int position )
+    {
+        return getItem(position);
+    }
 }
