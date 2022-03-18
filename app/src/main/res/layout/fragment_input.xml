@@ -3,46 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/button_input_ingredient"
-        android:layout_width="116dp"
-        android:layout_height="52dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:onClick="onClick_save_ingredient"
-        android:text="@string/plus"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_input_ingredient_weight" />
-
-    <Button
-        android:id="@+id/button_input_recipe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
-        android:onClick="onClick_save_recipe"
-        android:text="@string/speichern"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_input_recipe_description"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <EditText
-        android:id="@+id/edit_input_ingredient_name"
-        android:layout_width="212dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/input_ingredient_name"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toStartOf="@+id/edit_input_ingredient_weight"
-        app:layout_constraintHorizontal_bias="0.057"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_input_recipe_name" />
+    android:layout_height="match_parent"
+    tools:context=".view.ui.input.InputFragment">
 
     <EditText
         android:id="@+id/edit_input_recipe_name"
@@ -60,6 +22,20 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
 
+    <AutoCompleteTextView
+        android:id="@+id/edit_input_ingredient_name"
+        android:layout_width="212dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/input_ingredient_name"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toStartOf="@+id/edit_input_ingredient_weight"
+        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_input_recipe_name" />
+
     <EditText
         android:id="@+id/edit_input_ingredient_weight"
         android:layout_width="132dp"
@@ -71,6 +47,16 @@
         android:inputType="numberDecimal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_input_recipe_name" />
+
+    <Button
+        android:id="@+id/button_input_ingredient"
+        android:layout_width="116dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/plus"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_input_ingredient_weight" />
 
     <EditText
         android:id="@+id/edit_input_recipe_instruction"
@@ -103,5 +89,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_input_recipe_instruction" />
+
+    <Button
+        android:id="@+id/button_input_recipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:text="@string/speichern"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_input_recipe_description"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

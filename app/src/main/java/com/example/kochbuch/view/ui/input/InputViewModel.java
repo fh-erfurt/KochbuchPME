@@ -41,17 +41,24 @@ public class InputViewModel extends AndroidViewModel {
         return recipeId;
     }
 
+    public String saveRecipe(Recipe recipe){
+        long recipeId = insertRecipe(recipe);
+        return "Recipe saved - "+ recipeId;
+    }
     public LiveData<List<Ingredient>> getIngredients(){
         return this.ingredientRepository.getIngredients();
     }
-
+    public Ingredient getIngredient(String name){
+        return this.ingredientRepository.getIngredient(name);
+    }
     public void deleteAll(){
         this.recipeRepository.deleteAllRecipes();
         this.recipeRepository.deleteAllRecipeIngredients();
         this.ingredientRepository.deleteAll();
     }
 
-    public void generateTestData(){
+    public void generateTestData()
+    {
         this.deleteAll();
 
         //Ingredienten:
@@ -228,10 +235,10 @@ public class InputViewModel extends AndroidViewModel {
         //Sosse
 
         Ingredient tomatensosse = new Ingredient("Tomatensosse",29);
-        Ingredient gemuesebruehe = new Ingredient("gemuesebruehe",3);
+        Ingredient gemuesebruehe = new Ingredient("Gemuesebruehe",3);
         Ingredient tomatenpesto = new Ingredient("Tomatenpesto",426);
         Ingredient sojasauce = new Ingredient("Sojasauce",53);
-        Ingredient suessesauce = new Ingredient("suessesauce",53);
+        Ingredient suessesauce = new Ingredient("Suessesauce",53);
 
         //Oil
         Ingredient olivenoel = new Ingredient("Olivenöl",884);

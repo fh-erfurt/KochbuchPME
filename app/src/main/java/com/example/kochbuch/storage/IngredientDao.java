@@ -28,4 +28,8 @@ public interface IngredientDao extends BaseDao<Ingredient>{
     @Transaction
     @Query("SELECT i.id,i.created,i.modified,i.version,i.name,i.kcal100 FROM Ingredient as i JOIN RecipeIngredient as ri ON i.id = ri.ingredientId WHERE ri.recipeId = :recipeId")
     LiveData<List<Ingredient>> getIngredients(long recipeId);
+
+    @Query("SELECT * FROM Ingredient WHERE name = :name")
+    Ingredient getIngredient(String name);
+
 }

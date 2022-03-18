@@ -24,7 +24,7 @@ import java.util.concurrent.Executors;
     However, one can add more of needed. Any changes to the database like adding entities must
     result in a new, higher version number.
  */
-@Database( entities = {Recipe.class, Ingredient.class, RecipeIngredient.class}, version = 2)
+@Database( entities = {Recipe.class, Ingredient.class, RecipeIngredient.class}, version = 3)
 public abstract class CookbookDatabase extends RoomDatabase {
 
     private static final String LOG_TAG_DB = "ContactDB";

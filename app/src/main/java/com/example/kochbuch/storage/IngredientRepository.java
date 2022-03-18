@@ -32,6 +32,7 @@ public class IngredientRepository {
         return INSTANCE;
     }
 
+
     private IngredientRepository(Context context) {
         CookbookDatabase db = CookbookDatabase.getDatabase(context);
         this.ingredientDao = db.ingredientDao();
@@ -39,6 +40,9 @@ public class IngredientRepository {
 
     public LiveData<List<Ingredient>> getIngredients(){
         return this.queryLiveData(this.ingredientDao::getIngredients);
+    }
+    public Ingredient getIngredient (String name){
+        return this.ingredientDao.getIngredient(name);
     }
 
     public LiveData<List<Ingredient>> getIngredients(long recipeId){
