@@ -15,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 
 import com.example.kochbuch.R;
-import com.example.kochbuch.model.Ingredient;
 import com.example.kochbuch.model.Recipe;
 import com.example.kochbuch.model.RecipeIngredient;
 import com.example.kochbuch.view.ui.core.BaseFragment;
@@ -35,7 +34,6 @@ public class RecipeDetailFragment extends BaseFragment {
 
 
     public static  RecipeDetailFragment newInstance(long recipeId){
-        System.out.println("created fragment on: "+recipeId);
         RecipeDetailFragment fragment = new RecipeDetailFragment();
         Bundle args = new Bundle();
         args.putLong(ARG_RECIPE_ID,recipeId);
@@ -54,19 +52,21 @@ public class RecipeDetailFragment extends BaseFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         assert getArguments() != null;
         long recipeId = getArguments().getLong(ARG_RECIPE_ID);
-        System.out.println("got argument: "+recipeId);
         this.recipeLiveData = viewModel.getRecipe(recipeId);
         this.recipeIngredientsLiveData = viewModel.getRecipeIngredients(recipeId);
-
         this.recipeIngredientsLiveData.observe(requireActivity(),this::updateViewRI);
         this.recipeLiveData.observe(requireActivity(),this::updateView);
-
     }
-    // update for ri TODO wenn zusammengefasst kann als recyclerview benutzt werden
+
     private void updateViewRI(List<RecipeIngredient> recipeIngredients) {
         assert getView() != null;
         this.ingredientTable = getView().findViewById(R.id.ingredient_table);
@@ -85,17 +85,17 @@ public class RecipeDetailFragment extends BaseFragment {
             // gramm
             TextView txtGramm = new TextView(this.getContext());
             txtGramm.setTextSize(12);
-            txtGramm.setText(String.format("%s Gramm",ri.getQuantityInG()));
+            txtGramm.setText(String.format("%s Gramm",(ri.getQuantityInG()) ));
             tableRow.addView(txtGramm);
             // kcal 100
             TextView txtkcal100 = new TextView(this.getContext());
             txtkcal100.setTextSize(12);
-            txtkcal100.setText(String.format("%s kcal",ri.getIngredient().getKcal100()));
+            txtkcal100.setText(String.format("%s kcal", ri.getIngredient().getKcal100()));
             tableRow.addView(txtkcal100);
             // kcal erechnet
             TextView txtkcal = new TextView(this.getContext());
             txtkcal.setTextSize(12);
-            txtkcal.setText(String.format("%s kcal",((double)ri.getQuantityInG()/100*ri.getIngredient().getKcal100())));
+            txtkcal.setText(String.format("%s kcal",(double)((int) ((double) ri.getQuantityInG() / 100 * ri.getIngredient().getKcal100()) * 100 ) / 100 ));
             tableRow.addView(txtkcal);
             this.ingredientTable.addView(tableRow);
         }

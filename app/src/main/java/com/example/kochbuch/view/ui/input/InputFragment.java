@@ -65,18 +65,6 @@ public class InputFragment extends BaseFragment {
 
             inputViewModel = this.getViewModel(InputViewModel.class);
 
-
-            /*
-        viewModel = this.getViewModel( InputViewModel.class );
-        this.hideBackButton();
-        //was soll bei seitenaufbau pasieren
-        viewModel.generateTestData();
-
-
-        // TODO Eingabe von Rezepten
-        // TODO Hinzufügen / auswählen von neuen/vorhandenen Zutaten
-        // TODO beim auswählen mit typeahead
-*/
             View root = inflater.inflate(R.layout.fragment_input, container, false);
 
             this.nameField = root.findViewById(R.id.edit_input_recipe_name);
@@ -85,7 +73,7 @@ public class InputFragment extends BaseFragment {
             this.ingredientField = root.findViewById(R.id.edit_input_ingredient_name);
             this.ingredientweightField = root.findViewById(R.id.edit_input_ingredient_weight);
             //inputViewModel.generateTestData();
-
+            //this.inputViewModel.generateTestData();
             Button saveBtn = root.findViewById(R.id.button_input_recipe);
             this.addbtn = root.findViewById(R.id.button_input_ingredient);
             this.recipeIngredientList = new ArrayList<>();
