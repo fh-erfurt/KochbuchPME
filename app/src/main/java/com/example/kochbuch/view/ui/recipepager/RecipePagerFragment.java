@@ -26,6 +26,7 @@ import java.util.List;
 public class RecipePagerFragment extends BaseFragment {
 
     public static final String ARG_RECIPE_ID = "recipeId";
+    public static final String ARG_USED_LIST = "usedList";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,17 +51,18 @@ public class RecipePagerFragment extends BaseFragment {
      * @param viewModel our screens view model
      */
     private void preparePager(ViewPager2 pager, RecipePagerViewModel viewModel) {
-
+        assert getArguments() != null;
         RecipePagerAdapter adapter = new RecipePagerAdapter(this);
         pager.setAdapter( adapter );
-        pager.setOffscreenPageLimit(1); // NEW! AND IMPORTANT!
+        pager.setOffscreenPageLimit(4); // NEW! AND IMPORTANT!
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences( requireContext() );
         boolean pagerZoomEnabled = sharedPreferences.getBoolean(Constants.PREF_PAGER_ZOOM, false);
         if( pagerZoomEnabled )
             pager.setPageTransformer( new ZoomOutPageTransformer() );
 
-        viewModel.getRecipes().observe(getViewLifecycleOwner(), recipes -> {
+
+        viewModel.getRecipes(getArguments().getInt(ARG_USED_LIST)).observe(getViewLifecycleOwner(), recipes -> {
             adapter.setRecipes(recipes);
             long selectedRecipeId = getSelectedRecipeOrZero();
 
@@ -70,6 +72,11 @@ public class RecipePagerFragment extends BaseFragment {
                     super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 }
 
+                /**
+                 * sets the argument for the pager to position of the currentItem this is important to prevent the observer
+                 * from jumping back to the first selected position after changing the favorite entry in the recipe table
+                 * @param position
+                 */
                 @Override
                 public void onPageSelected(int position) {
                     super.onPageSelected(position);
@@ -113,6 +120,8 @@ public class RecipePagerFragment extends BaseFragment {
         public RecipePagerAdapter(RecipePagerFragment fa) {
             super(fa);
         }
+
+
 
         @NonNull
         @Override

@@ -38,7 +38,7 @@ public class RecipeDetailViewModel extends AndroidViewModel {
     public void updateRecipe(Recipe recipe){
         this.recipeRepository.update(recipe);
     }
-    //TODO: get ingredient details here
+
     public LiveData<Ingredient> getIngredient(long ingredientId){
         return this.ingredientRepository.getIngredient(ingredientId);
     }

@@ -30,9 +30,6 @@ public class RecipeDetailFragment extends BaseFragment {
     private LiveData<List<RecipeIngredient>> recipeIngredientsLiveData;
     private TableLayout ingredientTable;
 
-    // TODO either a dynamic Table or a RecylerView for ingredients
-
-
     public static  RecipeDetailFragment newInstance(long recipeId){
         RecipeDetailFragment fragment = new RecipeDetailFragment();
         Bundle args = new Bundle();
@@ -56,6 +53,9 @@ public class RecipeDetailFragment extends BaseFragment {
         super.onStart();
     }
 
+    /**
+     * sets the observers for recipe and recipeIngredients
+     */
     @Override
     public void onResume() {
         super.onResume();
@@ -67,6 +67,10 @@ public class RecipeDetailFragment extends BaseFragment {
         this.recipeLiveData.observe(requireActivity(),this::updateView);
     }
 
+    /**
+     * here the table with the recipe Ingredients is build
+     * @param recipeIngredients
+     */
     private void updateViewRI(List<RecipeIngredient> recipeIngredients) {
         assert getView() != null;
         this.ingredientTable = getView().findViewById(R.id.ingredient_table);
@@ -108,11 +112,13 @@ public class RecipeDetailFragment extends BaseFragment {
         this.recipeIngredientsLiveData.removeObservers(requireActivity());
     }
 
-    // main function for everything in the RecipeDetailView
+    /**
+     * here all the recipe data is pushed to the view and the favBtn changes the favorite state in the database for the current recipe
+     * @param recipe
+     */
     private void updateView(Recipe recipe) {
         assert getView() != null;
         assert recipe != null;
-        System.out.println(recipe.getName());
         // gets the elements in the Detail View
         TextView titleView = getView().findViewById( R.id.fragment_recipe_detail_textViewTitle );
         TextView instructionView = getView().findViewById( R.id.fragment_recipe_detail_instruction );

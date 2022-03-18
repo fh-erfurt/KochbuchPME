@@ -6,6 +6,10 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Ignore;
 
+/**
+ * this class is used for conecting a recipe with its ingredients
+ * only additional information is the quantity of the given ingredient for the recipe
+ */
 @Entity(tableName = "RecipeIngredient")
 public class RecipeIngredient extends Basemodel {
 

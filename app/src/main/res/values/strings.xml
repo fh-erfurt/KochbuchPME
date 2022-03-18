@@ -23,5 +23,6 @@
     <string name="title_recipe_pager">recipePager</string>
     <string name="action_menu_title_favorite">favorisieren</string>
     <string name="action_menu_title_delete">delete</string>
+    <string name="all">alle Rezepte</string>
 
 </resources>

@@ -32,10 +32,14 @@ import com.example.kochbuch.view.ui.core.BaseFragment;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * main recycler view for the recipes
+ */
 public class FavoriteRecipeListFragment extends BaseFragment {
     private RecipeListViewModel recipeListViewModel;
     private LiveData<List<Recipe>> recipes;
     private RecipeListAdapter adapter;
+    private int usedList = 0;
     //Start Screen of the app
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState){
@@ -52,9 +56,11 @@ public class FavoriteRecipeListFragment extends BaseFragment {
                 recipeId -> {
                     Bundle args = new Bundle();
                     args.putLong("recipeId", recipeId);
+                    args.putInt("usedList",this.usedList);
                     NavController nc = NavHostFragment.findNavController( this );
                     nc.navigate( R.id.action_recipe_list_to_recipe_detail , args );
-                });
+                }); // here the program navigates toe the recipePagerFragment with the given recipeId so the pager starts the detailFragment with it
+
         recipeListView.setAdapter(this.adapter);
         recipeListView.setLayoutManager(new LinearLayoutManager(this.requireActivity()));
 
@@ -95,27 +101,35 @@ public class FavoriteRecipeListFragment extends BaseFragment {
     }
 
 
-
+    /**
+     *
+     * @param item the clicked item in the filter menu
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         this.recipes.removeObservers(this.requireActivity());
 
         switch(item.getItemId()){
+            case R.id.select_all:
+                this.recipes = recipeListViewModel.getRecipes();
+                this.usedList = 0;
+                break;
             case R.id.select_favorites:
-                System.out.println("this is favorites");
                 this.recipes = recipeListViewModel.getFavorites();
+                this.usedList = 1;
                 break;
             case R.id.select_vegetarian:
-                System.out.println("this is vegetarisch");
                 this.recipes = recipeListViewModel.getVegetarian();
+                this.usedList = 2;
                 break;
             case R.id.select_meat:
-                System.out.println("this is meat");
                 this.recipes = recipeListViewModel.getOmnivore();
+                this.usedList = 3;
                 break;
             case R.id.select_vegan:
-                System.out.println("this is vegan");
                 this.recipes = recipeListViewModel.getVegan();
+                this.usedList = 4;
                 break;
         }
         this.recipes.observe(this.requireActivity(),this.adapter::submitList);

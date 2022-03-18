@@ -5,6 +5,9 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * the Basemodel
+ */
 public abstract class Basemodel {
 
     @PrimaryKey(autoGenerate = true)
