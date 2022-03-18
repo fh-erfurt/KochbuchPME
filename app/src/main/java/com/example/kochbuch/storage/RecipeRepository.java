@@ -87,6 +87,11 @@ public class RecipeRepository {
     }
     public void deleteAllRecipeIngredients(){ CookbookDatabase.execute(recipeIngredientDao::deleteAll);}
 
+    public void deleteFullRecipe(Recipe recipe){
+        CookbookDatabase.execute(()->recipeIngredientDao.delete(recipe.getIngredients()));
+        CookbookDatabase.execute(()->recipeDao.delete(recipe));
+    }
+
     private <T> LiveData<T> queryLiveData( Callable<LiveData<T>> query )
     {
         try {

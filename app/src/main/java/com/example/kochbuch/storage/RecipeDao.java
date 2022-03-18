@@ -41,4 +41,6 @@ public interface RecipeDao extends BaseDao<Recipe> {
     @Transaction
     @Query("SELECT * FROM Recipe WHERE foodtype = 'VEGAN'")
     LiveData<List<Recipe>> getVegan();
+
+
 }

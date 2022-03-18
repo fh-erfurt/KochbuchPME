@@ -21,5 +21,7 @@
     <string name="vegan">Vegan</string>
     <string name="title_settings">settings</string>
     <string name="title_recipe_pager">recipePager</string>
+    <string name="action_menu_title_favorite">favorisieren</string>
+    <string name="action_menu_title_delete">delete</string>
 
 </resources>

@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/E:/Program%20Files%20(x86)/androidstudio/plugins/android/lib/android.jar!/images/material/icons/materialicons/menu/baseline_menu_24.xml" />
+                                      <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/delete/baseline_delete_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,7 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_filter_icon" />
+                            <entry key="outputName" value="ic_baseline_delete_24" />
                             <entry key="sourceFile" value="D:\Fachhochschule\ProgrammProjekte\android" />
                           </map>
                         </option>

@@ -32,13 +32,11 @@ public class RecipePagerFragment extends BaseFragment {
 
         View root =  inflater.inflate(R.layout.fragment_recipe_pager, container, false);
         RecipePagerViewModel viewModel = this.getViewModel(RecipePagerViewModel.class);
-        System.out.println("gehen wir hier rein?");
         // Find pager and TabLayout in our layout
         ViewPager2 pager = root.findViewById(R.id.recipe_pager_viewpager);
 
         // Configure pager and tab bar
         this.preparePager(pager, viewModel);
-
         this.hideBackButton();
 
         return root;
@@ -53,7 +51,7 @@ public class RecipePagerFragment extends BaseFragment {
 
         RecipePagerAdapter adapter = new RecipePagerAdapter(this);
         pager.setAdapter( adapter );
-        pager.setOffscreenPageLimit(4); // NEW! AND IMPORTANT!
+        pager.setOffscreenPageLimit(1); // NEW! AND IMPORTANT!
 
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences( requireContext() );
         boolean pagerZoomEnabled = sharedPreferences.getBoolean(Constants.PREF_PAGER_ZOOM, false);
@@ -62,8 +60,8 @@ public class RecipePagerFragment extends BaseFragment {
 
         viewModel.getRecipes().observe(getViewLifecycleOwner(), recipes -> {
             adapter.setRecipes(recipes);
-            long selectedContactId = getSelectedRecipeOrZero();
-            pager.setCurrentItem( adapter.getSelectedRecipePosition( selectedContactId ));
+            long selectedRecipeId = getSelectedRecipeOrZero();
+            pager.setCurrentItem( adapter.getSelectedRecipePosition( selectedRecipeId ));
         });
     }
 
@@ -94,7 +92,9 @@ public class RecipePagerFragment extends BaseFragment {
         @NonNull
         @Override
         public Fragment createFragment(int position) {
+            System.out.println("create pos: "+position);
             Recipe r = this.recipes.get( position );
+            System.out.println("create frag: "+r.getName());
             return RecipeDetailFragment.newInstance( r.getId() );
         }
 
@@ -111,13 +111,16 @@ public class RecipePagerFragment extends BaseFragment {
 
         public int getSelectedRecipePosition( long recipeId )
         {
+            System.out.println("recipeId: "+recipeId);
             if( this.recipes != null ) {
                 for( int i = 0; i < this.recipes.size(); i++ ) {
-                    if( this.recipes.get( i ).getId() == recipeId )
+                    if( this.recipes.get( i ).getId() == recipeId ){
+                        System.out.println("recipeId found on -- "+i);
                         return i;
+                    }
+
                 }
             }
-
             return 0;
         }
 

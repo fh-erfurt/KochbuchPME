@@ -41,4 +41,17 @@ public class RecipeListViewModel extends AndroidViewModel {
     public LiveData<List<Recipe>> getVegan() {
         return this.recipeRepository.getVegan();
     }
+
+
+    public void deleteRecipes(List<Recipe> recipes){
+        for (Recipe recipe : recipes) {
+            this.recipeRepository.deleteFullRecipe(recipe);
+        }
+    }
+    public void favoriteRecipes(List<Recipe> recipes){
+        for (Recipe recipe:recipes) {
+            recipe.setFavorite(!recipe.isFavorite());
+            this.recipeRepository.update(recipe);
+        }
+    }
 }

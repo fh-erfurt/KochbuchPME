@@ -23,5 +23,4 @@ public interface RecipeIngredientDao extends BaseDao<RecipeIngredient>{
     @Transaction
     @Query("SELECT * FROM RecipeIngredient WHERE recipeId = :recipeId")
     LiveData<List<RecipeIngredientIngredient>> getRecipeIngredientsWithIngredient(long recipeId);
-
 }

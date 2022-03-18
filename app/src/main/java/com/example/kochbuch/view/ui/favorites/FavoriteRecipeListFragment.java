@@ -29,6 +29,7 @@ import com.example.kochbuch.view.ui.recipelist.RecipeListAdapter;
 import com.example.kochbuch.view.ui.recipelist.RecipeListViewModel;
 import com.example.kochbuch.view.ui.core.BaseFragment;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteRecipeListFragment extends BaseFragment {
@@ -54,9 +55,25 @@ public class FavoriteRecipeListFragment extends BaseFragment {
                     NavController nc = NavHostFragment.findNavController( this );
                     nc.navigate( R.id.action_recipe_list_to_recipe_detail , args );
                 });
-
         recipeListView.setAdapter(this.adapter);
         recipeListView.setLayoutManager(new LinearLayoutManager(this.requireActivity()));
+
+        // selection handling
+        SelectionTracker<Long> tracker = new SelectionTracker.Builder<>(
+                "mySelectionId",
+                recipeListView,
+                new StableIdKeyProvider(recipeListView),
+                new RecipeItemDetailsLookup(recipeListView),
+                StorageStrategy.createLongStorage())
+                .withSelectionPredicate(
+                        SelectionPredicates.createSelectAnything()
+                )
+                .build();
+
+        tracker.addObserver(new RecipeSelectionObserver(tracker,adapter));
+        adapter.setSelectionTracker(tracker);
+        //set recipes
+
         this.recipes = recipeListViewModel.getRecipes();
 
         this.recipes.observe(this.requireActivity(), this.adapter::submitList);
@@ -105,6 +122,85 @@ public class FavoriteRecipeListFragment extends BaseFragment {
         return true;
         //return super.onOptionsItemSelected(item);
     }
+
+
+    private class RecipeSelectionObserver extends SelectionTracker.SelectionObserver<Long> {
+
+        private final SelectionTracker<Long> tracker;
+        private final RecipeListAdapter adapter;
+        ActionMode actionMode;
+
+        public RecipeSelectionObserver(SelectionTracker<Long> tracker, RecipeListAdapter adapter) {
+            this.tracker = tracker;
+            this.adapter = adapter;
+        }
+
+        @Override
+        public void onSelectionChanged() {
+            super.onSelectionChanged();
+
+            Log.i("RecipeSelectionObserver", "Selection: " + tracker.getSelection());
+
+            if (actionMode != null) return;
+
+            actionMode = requireActivity().startActionMode(new ActionMode.Callback() {
+                @Override
+                public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                    MenuInflater inflater = mode.getMenuInflater();
+                    inflater.inflate(R.menu.list_action_mode_menu, menu);
+                    return true;
+                }
+
+                @Override
+                public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
+
+                    final List<Recipe> selectedRecipes = getSelectedRecipes();
+
+                    if (item.getItemId() == R.id.list_action_delete) {
+                        recipeListViewModel.deleteRecipes( selectedRecipes );
+                    }
+                    else if( item.getItemId() == R.id.list_action_favorite ) {
+                        recipeListViewModel.favoriteRecipes( selectedRecipes );
+                    }
+
+                    if (actionMode != null)
+                        actionMode.finish();
+
+                    return true;
+                }
+
+                /*
+                    Handle Action Mode Back Button
+                 */
+                @Override
+                public void onDestroyActionMode( ActionMode mode ) {
+                    tracker.clearSelection();
+                    actionMode = null;
+                }
+
+                @Override
+                public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
+                    return false;
+                }
+            });
+        }
+
+        private List<Recipe> getSelectedRecipes() {
+            List<Recipe> selectedContacts = new ArrayList<>(tracker.getSelection().size());
+
+            tracker.getSelection().iterator().forEachRemaining(aLong -> {
+
+                Recipe c = adapter.getRecipe(aLong.intValue());
+
+                Log.i("RecipeSelectionObserver", "Selected Recipe: " + aLong);
+
+                selectedContacts.add(c);
+            });
+
+            return selectedContacts;
+        }
+    }
+
 
 
 }

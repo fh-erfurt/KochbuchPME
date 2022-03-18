@@ -93,11 +93,25 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
     }
     @Override
     public long getItemId(int position) {
-        return position;
+        return this.getCurrentList().get(position).getId();
+    }
+
+
+    public Recipe getItemById(int position){
+        Recipe erg = null;
+        int i = 0;
+        for (Recipe recipe:this.getCurrentList()) {
+            if(recipe.getId()==position){
+                erg = recipe;
+            }
+            i++;
+        }
+        return erg;
     }
 
     public Recipe getRecipe( int position )
     {
-        return getItem(position);
+        System.out.println("index"+position);
+        return getItemById(position);
     }
 }

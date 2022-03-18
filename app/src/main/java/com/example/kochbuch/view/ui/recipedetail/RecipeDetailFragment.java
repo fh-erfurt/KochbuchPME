@@ -35,6 +35,7 @@ public class RecipeDetailFragment extends BaseFragment {
 
 
     public static  RecipeDetailFragment newInstance(long recipeId){
+        System.out.println("created fragment on: "+recipeId);
         RecipeDetailFragment fragment = new RecipeDetailFragment();
         Bundle args = new Bundle();
         args.putLong(ARG_RECIPE_ID,recipeId);
@@ -57,6 +58,7 @@ public class RecipeDetailFragment extends BaseFragment {
         super.onResume();
         assert getArguments() != null;
         long recipeId = getArguments().getLong(ARG_RECIPE_ID);
+        System.out.println("got argument: "+recipeId);
         this.recipeLiveData = viewModel.getRecipe(recipeId);
         this.recipeIngredientsLiveData = viewModel.getRecipeIngredients(recipeId);
 
@@ -67,7 +69,6 @@ public class RecipeDetailFragment extends BaseFragment {
     // update for ri TODO wenn zusammengefasst kann als recyclerview benutzt werden
     private void updateViewRI(List<RecipeIngredient> recipeIngredients) {
         assert getView() != null;
-        System.out.println("size of array "+recipeIngredients.size());
         this.ingredientTable = getView().findViewById(R.id.ingredient_table);
         this.ingredientTable.setStretchAllColumns(true);
         this.ingredientTable.bringToFront();
@@ -111,13 +112,13 @@ public class RecipeDetailFragment extends BaseFragment {
     private void updateView(Recipe recipe) {
         assert getView() != null;
         assert recipe != null;
+        System.out.println(recipe.getName());
         // gets the elements in the Detail View
         TextView titleView = getView().findViewById( R.id.fragment_recipe_detail_textViewTitle );
         TextView instructionView = getView().findViewById( R.id.fragment_recipe_detail_instruction );
         ImageView recipeImage = getView().findViewById( R.id.fragment_recipe_detail_image );
         TextView descriptionView = getView().findViewById(R.id.fragment_recipe_detail_description);
 
-        System.out.println(recipe);
         // sets the Text elements of the xml file
         titleView.setText(String.format("%s",recipe.getName()));
         instructionView.setText(String.format("%s",recipe.getInstruction()));
@@ -140,9 +141,9 @@ public class RecipeDetailFragment extends BaseFragment {
             }
         });
         if(recipe.isFavorite()){
-            btnFavorite.setText(String.format("%s","vergessen"));
+            this.btnFavorite.setText(String.format("%s","vergessen"));
         }else{
-            btnFavorite.setText(String.format("%s","merken"));
+            this.btnFavorite.setText(String.format("%s","merken"));
         }
 
 
