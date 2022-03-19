@@ -1,6 +1,11 @@
 package com.example.kochbuch.view.ui.input;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.LiveData;
 
 import com.example.kochbuch.R;
@@ -19,19 +27,25 @@ import com.example.kochbuch.enums.Foodtypes;
 import com.example.kochbuch.model.Ingredient;
 import com.example.kochbuch.model.Recipe;
 import com.example.kochbuch.model.RecipeIngredient;
+import com.example.kochbuch.storage.FileSystemHandler;
 import com.example.kochbuch.view.ui.core.BaseFragment;
-import com.example.kochbuch.view.ui.recipedetail.RecipeDetailViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class InputFragment extends BaseFragment {
-    //TODO should let the user input new Recipes
+
+    private static final int REQUEST_IMAGE_CAPTURE = 1337;
+    private String currentPicturePath;
+
     private InputViewModel inputViewModel;
     private EditText nameField;
     private EditText instructionField;
     private EditText descriptionField;
+    private ImageView picturePreview;
     private AutoCompleteTextView ingredientField;
     private EditText ingredientweightField;
     private Button addbtn;
@@ -50,8 +64,11 @@ public class InputFragment extends BaseFragment {
                     instructionField.getText().toString(),
                     descriptionField.getText().toString(),
                     Foodtypes.VEGETARIAN);
+            System.out.println(this.currentPicturePath);
+            newRecipe.setPicturePath( this.currentPicturePath );
+
             for (RecipeIngredient ringredient: this.recipeIngredientList){
-                System.out.println(ringredient.getIngredient().getName() + " : " +ringredient.getQuantityInG() );
+                System.out.println(ringredient.getIngredient().getName() + " : " +ringredient.getQuantityInG() + " " + ringredient.getIngredient().getId());
             }
             newRecipe.setIngredients(this.recipeIngredientList);
             String returnValue = this.inputViewModel.saveRecipe(newRecipe);
@@ -76,12 +93,46 @@ public class InputFragment extends BaseFragment {
             //this.inputViewModel.generateTestData();
             Button saveBtn = root.findViewById(R.id.button_input_recipe);
             this.addbtn = root.findViewById(R.id.button_input_ingredient);
+            this.picturePreview = root.findViewById( R.id.picture_preview );
+            this.picturePreview.setOnClickListener( this.picturePreviewClickListener );
             this.recipeIngredientList = new ArrayList<>();
             saveBtn.setOnClickListener(this.saveButtonClickListener);
 
         return root;
     }
+    private final View.OnClickListener picturePreviewClickListener = v -> {
 
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(requireActivity().getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = FileSystemHandler.createImageFile( requireContext() );
+                currentPicturePath = "file://" + photoFile.getAbsolutePath();
+            } catch (IOException ex) {
+                Toast.makeText(requireContext(), "Could not create file for image", Toast.LENGTH_SHORT ).show();
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(requireContext(),
+                        "com.example.kochbuch.fileprovider",
+                        photoFile);
+                takePictureIntent.putExtra( MediaStore.EXTRA_OUTPUT, photoURI );
+                startActivityForResult( takePictureIntent, REQUEST_IMAGE_CAPTURE );
+            }
+        }
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+            this.picturePreview.setImageURI( Uri.parse(currentPicturePath) );
+        }
+    }
     @Override
     public void onResume() {
         super.onResume();

@@ -27,6 +27,7 @@ public class InputViewModel extends AndroidViewModel {
 
     public long insertRecipe(Recipe recipe){
         long recipeId = this.recipeRepository.insert(recipe);
+        System.out.println("before loop");
         for (RecipeIngredient ri: recipe.getIngredients()) {
             ri.setRecipeId(recipeId);
             Ingredient ingredient = ri.getIngredient();
@@ -36,6 +37,7 @@ public class InputViewModel extends AndroidViewModel {
                 ingredientId = this.ingredientRepository.insert(ingredient);
             }
             ri.setIngredientId(ingredientId);
+            System.out.println("before insert");
             this.recipeRepository.insert(ri);
         }
         return recipeId;

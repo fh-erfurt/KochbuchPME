@@ -15,6 +15,7 @@
     <string name="input_ingredient_weight">Gramm</string>
     <string name="input_recipe_instruction">Instruktion</string>
     <string name="input_recipe_description">Bezeichnung</string>
+    <string name="input_desrc_recipe_picture_preview">Recipe Preview Picture</string>
     <string name="favoriten">Favoriten</string>
     <string name="vegetarian">Vegetarisch</string>
     <string name="meat">Fleisch</string>
