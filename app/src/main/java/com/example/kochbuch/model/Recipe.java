@@ -116,9 +116,9 @@ public class Recipe extends Basemodel {
         if(this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Recipe recipe = (Recipe) o;
-        return name.equals(recipe.name) &&
-                instruction.equals(recipe.instruction) &&
-                picturePath.equals(recipe.picturePath);
+        return this.name.equals(recipe.name) &&
+                this.instruction.equals(recipe.instruction) &&
+                this.picturePath.equals(recipe.picturePath);
     }
 
     public boolean isFavorite() {
