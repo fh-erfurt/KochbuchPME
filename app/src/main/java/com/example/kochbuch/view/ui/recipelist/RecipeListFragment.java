@@ -1,4 +1,4 @@
-package com.example.kochbuch.view.ui.favorites;
+package com.example.kochbuch.view.ui.recipelist;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -35,7 +35,7 @@ import java.util.List;
 /**
  * main recycler view for the recipes
  */
-public class FavoriteRecipeListFragment extends BaseFragment {
+public class RecipeListFragment extends BaseFragment {
     private RecipeListViewModel recipeListViewModel;
     private LiveData<List<Recipe>> recipes;
     private RecipeListAdapter adapter;

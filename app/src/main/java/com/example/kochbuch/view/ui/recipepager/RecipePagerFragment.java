@@ -65,13 +65,11 @@ public class RecipePagerFragment extends BaseFragment {
         viewModel.getRecipes(getArguments().getInt(ARG_USED_LIST)).observe(getViewLifecycleOwner(), recipes -> {
             adapter.setRecipes(recipes);
             long selectedRecipeId = getSelectedRecipeOrZero();
-
             pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                     super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 }
-
                 /**
                  * sets the argument for the pager to position of the currentItem this is important to prevent the observer
                  * from jumping back to the first selected position after changing the favorite entry in the recipe table
@@ -81,8 +79,10 @@ public class RecipePagerFragment extends BaseFragment {
                 public void onPageSelected(int position) {
                     super.onPageSelected(position);
                     Bundle args = new Bundle();
-                    args.putLong("recipeId", recipes.get(position).getId());
-                    setArguments(args);
+                    if(recipes.size()>0){
+                        args.putLong("recipeId", recipes.get(position).getId());
+                        setArguments(args);
+                    }
                 }
 
                 @Override
@@ -90,12 +90,9 @@ public class RecipePagerFragment extends BaseFragment {
                     super.onPageScrollStateChanged(state);
                 }
             });
-            pager.setCurrentItem( adapter.getSelectedRecipePosition( selectedRecipeId ));
+            int selectedPosition = adapter.getSelectedRecipePosition( selectedRecipeId );
+            pager.setCurrentItem( selectedPosition );
         });
-    }
-
-    void onChange(){
-
     }
 
     /**
@@ -121,14 +118,13 @@ public class RecipePagerFragment extends BaseFragment {
             super(fa);
         }
 
-
-
         @NonNull
         @Override
         public Fragment createFragment(int position) {
             Recipe r = this.recipes.get( position );
             return RecipeDetailFragment.newInstance( r.getId() );
         }
+
 
         @Override
         public int getItemCount() {

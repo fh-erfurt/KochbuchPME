@@ -158,10 +158,6 @@ public class InputFragment extends BaseFragment {
            strings[i] = ingredient.getName();
            i++;
         }
-        for (int j = 0; j<ingredients.size(); j++)
-        {
-            System.out.println(strings[j]);
-        }
         AutoCompleteTextView autoCompleteTextView = this.ingredientField;
 
         ArrayAdapter<String> adapter;

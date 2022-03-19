@@ -29,6 +29,7 @@ public class RecipeDetailFragment extends BaseFragment {
     private Button btnFavorite;
     private LiveData<List<RecipeIngredient>> recipeIngredientsLiveData;
     private TableLayout ingredientTable;
+    private View localView;
 
     public static  RecipeDetailFragment newInstance(long recipeId){
         RecipeDetailFragment fragment = new RecipeDetailFragment();
@@ -43,15 +44,24 @@ public class RecipeDetailFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
+        //this.localView = root;
         viewModel = this.getViewModel( RecipeDetailViewModel.class );
+
+        assert getArguments() != null;
+        long recipeId = getArguments().getLong(ARG_RECIPE_ID);
+        this.recipeLiveData = viewModel.getRecipe(recipeId);
+        this.recipeIngredientsLiveData = viewModel.getRecipeIngredients(recipeId);
+
         this.hideBackButton();
         return root;
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public View getView(){
+        return super.getView();
     }
+
+
 
     /**
      * sets the observers for recipe and recipeIngredients
@@ -59,14 +69,13 @@ public class RecipeDetailFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-        assert getArguments() != null;
-        long recipeId = getArguments().getLong(ARG_RECIPE_ID);
-        this.recipeLiveData = viewModel.getRecipe(recipeId);
-        this.recipeIngredientsLiveData = viewModel.getRecipeIngredients(recipeId);
         this.recipeIngredientsLiveData.observe(requireActivity(),this::updateViewRI);
         this.recipeLiveData.observe(requireActivity(),this::updateView);
     }
-
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
     /**
      * here the table with the recipe Ingredients is build
      * @param recipeIngredients
@@ -137,7 +146,6 @@ public class RecipeDetailFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 recipe.setFavorite(!recipe.isFavorite());
-                System.out.println("recipe is currently: "+ recipe.isFavorite());
                 if(recipe.isFavorite()){
                     btnFavorite.setText(String.format("%s","vergessen"));
                 }else{
@@ -157,12 +165,13 @@ public class RecipeDetailFragment extends BaseFragment {
 
 
         Picasso p = Picasso.get();
-
-        /*p.load(recipe.getPicturePath())
-                .error(R.drawable.icon_error)
-                .fit()
-                .into( recipeImage );
-        System.out.println("detail site on " + recipe.getId());*/
+        if(recipe.getPicturePath() != null && !recipe.getPicturePath().equals("")) {
+            p.load(recipe.getPicturePath())
+                    .error(R.drawable.icon_error)
+                    .fit()
+                    .into( recipeImage );
+            System.out.println("detail site on " + recipe.getId());
+        }
 
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.ui.favorites.FavoriteRecipeListFragment">
+    tools:context=".view.ui.recipelist.RecipeListFragment">
 
     <TextView
         android:id="@+id/text_recipes"

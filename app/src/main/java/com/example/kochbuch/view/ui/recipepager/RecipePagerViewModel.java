@@ -20,6 +20,11 @@ public class RecipePagerViewModel extends AndroidViewModel {
         this.recipeRepository = RecipeRepository.getRepository(application);
     }
 
+    /**
+     * gets the recipe list with the given filtervalue which is applied in RecipeListFragment.onOptionsItemSelected()
+     * @param usedList
+     * @return the filtered recipeList
+     */
     public LiveData<List<Recipe>> getRecipes(int usedList) {
         LiveData<List<Recipe>> erg = null;
         switch(usedList){

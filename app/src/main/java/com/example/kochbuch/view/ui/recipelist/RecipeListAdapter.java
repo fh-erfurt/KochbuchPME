@@ -86,10 +86,12 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
 
         Picasso p = Picasso.get();
 
-        /*p.load(current.getPicturePath())
-                .placeholder(R.drawable.recipe_preview_placeholder)
-                .error(R.drawable.icon_error)
-                .into( holder.recipeImage );*/
+        if(current.getPicturePath() != null && !current.getPicturePath().equals("")){
+            p.load(current.getPicturePath())
+                    .placeholder(R.drawable.recipe_preview_placeholder)
+                    .error(R.drawable.icon_error)
+                    .into( holder.recipeImage );
+        }
     }
     @Override
     public long getItemId(int position) {
