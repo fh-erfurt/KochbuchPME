@@ -1,29 +1,28 @@
 <resources>
     <string name="app_name">Kochbuch</string>
-    <string name="title_input">add new Recipe</string>
-    <string name="title_recipeList">recipes</string>
-    <string name="title_Favorites">favorites</string>
-    <string name="text_descr_recipe_picture">Recipe Picture</string>
-    <string name="title_browse">browse</string>
+    <string name="title_input">Rezept hinzufügen</string>
+    <string name="title_recipeList">Rezepte</string>
+    <string name="title_Favorites">Favoriten</string>
+    <string name="text_descr_recipe_picture">Rezept Bild</string>
     <string name="text_empty_list">#No Content#</string>
-    <string name="title_recipe_details">details</string>
-    <string name="input">addNewRecipe</string>
+    <string name="title_recipe_details">Details</string>
+    <string name="input">Rezept hinzufügen</string>
     <string name="speichern">speichern</string>
     <string name="plus">+</string>
     <string name="input_recipe_name">Rezept name</string>
-    <string name="input_ingredient_name">Ingredient</string>
+    <string name="input_ingredient_name">Zutat</string>
     <string name="input_ingredient_weight">Gramm</string>
     <string name="input_recipe_instruction">Instruktion</string>
     <string name="input_recipe_description">Bezeichnung</string>
-    <string name="input_desrc_recipe_picture_preview">Recipe Preview Picture</string>
+    <string name="input_desrc_recipe_picture_preview">Rezpt Vorschau Bild</string>
     <string name="favoriten">Favoriten</string>
-    <string name="vegetarian">Vegetarisch</string>
-    <string name="meat">Fleisch</string>
-    <string name="vegan">Vegan</string>
-    <string name="title_settings">settings</string>
-    <string name="title_recipe_pager">recipePager</string>
+    <string name="vegetarian">Vegetarische Rezpte</string>
+    <string name="meat">Rezepte mit Fleisch</string>
+    <string name="vegan">Vegane Rezepte</string>
+    <string name="title_settings">Einstellungen</string>
+    <string name="title_recipe_pager">Rezept</string>
     <string name="action_menu_title_favorite">favorisieren</string>
-    <string name="action_menu_title_delete">delete</string>
+    <string name="action_menu_title_delete">löschen</string>
     <string name="all">alle Rezepte</string>
 
 </resources>

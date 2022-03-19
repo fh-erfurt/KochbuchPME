@@ -36,7 +36,6 @@ public class RecipePagerFragment extends BaseFragment {
         RecipePagerViewModel viewModel = this.getViewModel(RecipePagerViewModel.class);
         // Find pager and TabLayout in our layout
         ViewPager2 pager = root.findViewById(R.id.recipe_pager_viewpager);
-
         // Configure pager and tab bar
         this.preparePager(pager, viewModel);
         this.hideBackButton();

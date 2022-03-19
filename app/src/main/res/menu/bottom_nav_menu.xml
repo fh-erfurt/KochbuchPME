@@ -6,7 +6,7 @@
 
     <item
         android:id="@+id/navigation_favorites"
-        android:title="@string/title_Favorites" />
+        android:title="@string/title_recipeList" />
 
     <item
         android:id="@+id/navigation_settings"
