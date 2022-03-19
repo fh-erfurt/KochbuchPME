@@ -108,11 +108,40 @@
         android:layout_width="180dp"
         android:layout_height="111dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:contentDescription="@string/input_desrc_recipe_picture_preview"
         android:src="@drawable/recipe_preview_placeholder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edit_input_ingredient_name" />
+
+    <RadioGroup
+        android:id="@+id/recipe_input_foodtypes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:checkedButton="@+id/recipe_input_foodtypes_omnivore"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/picture_preview">
+
+        <RadioButton
+            android:id="@+id/recipe_input_foodtypes_vegan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegan" />
+
+        <RadioButton
+            android:id="@+id/recipe_input_foodtypes_vegetarian"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vegetarian" />
+
+        <RadioButton
+            android:id="@+id/recipe_input_foodtypes_omnivore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Omnivore" />
+    </RadioGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
