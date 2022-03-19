@@ -45,7 +45,7 @@ import java.util.List;
 public class InputFragment extends BaseFragment {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1337;
-    private String currentPicturePath;
+    private String currentPicturePath = "";
 
     private InputViewModel inputViewModel;
     private EditText nameField;
@@ -208,10 +208,6 @@ public class InputFragment extends BaseFragment {
             }
         });
     }
-
-
-        // ingredient liste
-        // ingredients = Liste aller in der Datenbank vorhandenen Zutaten
 }
 
 
