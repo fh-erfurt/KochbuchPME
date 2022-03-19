@@ -55,11 +55,11 @@ public class RecipeListFragment extends BaseFragment {
         this.adapter = new RecipeListAdapter(this.requireActivity(),
                 recipeId -> {
                     Bundle args = new Bundle();
-                    args.putLong("recipeId", recipeId);
-                    args.putInt("usedList",this.usedList);
+                    args.putLong("recipeId", recipeId); // the id for the clicked recipe
+                    args.putInt("usedList",this.usedList); // used list is the value for the current set filter
                     NavController nc = NavHostFragment.findNavController( this );
-                    nc.navigate( R.id.action_recipe_list_to_recipe_detail , args );
-                }); // here the program navigates toe the recipePagerFragment with the given recipeId so the pager starts the detailFragment with it
+                    nc.navigate( R.id.action_recipe_list_to_recipe_detail , args ); // here the program navigates to the recipePagerFragment with the given recipeId so the pager starts the detailFragment with it
+                });
 
         recipeListView.setAdapter(this.adapter);
         recipeListView.setLayoutManager(new LinearLayoutManager(this.requireActivity()));
@@ -134,7 +134,6 @@ public class RecipeListFragment extends BaseFragment {
         }
         this.recipes.observe(this.requireActivity(),this.adapter::submitList);
         return true;
-        //return super.onOptionsItemSelected(item);
     }
 
 

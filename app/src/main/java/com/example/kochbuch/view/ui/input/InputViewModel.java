@@ -25,19 +25,16 @@ public class InputViewModel extends AndroidViewModel {
         this.ingredientRepository = IngredientRepository.getRepository(application);
     }
 
+    /**
+     * first inserts the recipe and gets back the new id
+     * then sets the new recipe id in every recipeIngredient and inserts it
+     * @param recipe
+     * @return the id of the new inserted Recipe
+     */
     public long insertRecipe(Recipe recipe){
         long recipeId = this.recipeRepository.insert(recipe);
-        System.out.println("before loop");
         for (RecipeIngredient ri: recipe.getIngredients()) {
             ri.setRecipeId(recipeId);
-            Ingredient ingredient = ri.getIngredient();
-            System.out.println("ingredient Id" + ingredient.getId());
-            long ingredientId = ingredient.getId();
-            if(ingredientId == 0){
-                ingredientId = this.ingredientRepository.insert(ingredient);
-            }
-            ri.setIngredientId(ingredientId);
-            System.out.println("before insert");
             this.recipeRepository.insert(ri);
         }
         return recipeId;
@@ -50,15 +47,4 @@ public class InputViewModel extends AndroidViewModel {
     public LiveData<List<Ingredient>> getIngredients(){
         return this.ingredientRepository.getIngredients();
     }
-    public Ingredient getIngredient(String name){
-        return this.ingredientRepository.getIngredient(name);
-    }
-    public void deleteAll(){
-        this.recipeRepository.deleteAllRecipes();
-        this.recipeRepository.deleteAllRecipeIngredients();
-        this.ingredientRepository.deleteAll();
-    }
-
-
-
 }

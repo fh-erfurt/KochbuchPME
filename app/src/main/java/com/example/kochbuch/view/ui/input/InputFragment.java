@@ -36,6 +36,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * this fragment handles the input for new Recipes
+ * only Ingredients that are already in the database can be selected
+ *
+ */
 public class InputFragment extends BaseFragment {
 
     private static final int REQUEST_IMAGE_CAPTURE = 1337;
@@ -67,9 +72,6 @@ public class InputFragment extends BaseFragment {
             System.out.println(this.currentPicturePath);
             newRecipe.setPicturePath( this.currentPicturePath );
 
-            for (RecipeIngredient ringredient: this.recipeIngredientList){
-                System.out.println(ringredient.getIngredient().getName() + " : " +ringredient.getQuantityInG() + " " + ringredient.getIngredient().getId());
-            }
             newRecipe.setIngredients(this.recipeIngredientList);
             String returnValue = this.inputViewModel.saveRecipe(newRecipe);
 

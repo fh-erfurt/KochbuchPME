@@ -12,6 +12,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Objects;
 
+/**
+ *
+ * basefragment all fragments used extend this Fragment it extends Fragment
+ */
 public class BaseFragment extends Fragment {
 
     /*

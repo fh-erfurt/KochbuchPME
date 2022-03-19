@@ -79,7 +79,7 @@ public abstract class CookbookDatabase extends RoomDatabase {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             CookbookDatabase.class, "cookbook_db")
                             .fallbackToDestructiveMigration()
-                            .addCallback(createCallback)
+                            .addCallback(createCallback) // here the testdata callback is called
                             .build();
                 }
             }
@@ -87,7 +87,14 @@ public abstract class CookbookDatabase extends RoomDatabase {
         return INSTANCE;
     }
 
+    /**
+     * callback for creating the testdata
+     */
     private static final RoomDatabase.Callback createCallback = new RoomDatabase.Callback(){
+        /**
+         * onCreate is only called when the database is created the first time
+         * @param db
+         */
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db){
             super.onCreate(db);

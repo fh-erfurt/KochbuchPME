@@ -1,15 +1,16 @@
 package com.example.kochbuch.storage;
 
-import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
-import androidx.room.Query;
 import androidx.room.Update;
 
-import com.example.kochbuch.model.Recipe;
-
 import java.util.List;
+
+/**
+ * base dao all daos have these functions as default
+ * @param <T>
+ */
 @Dao
 public interface BaseDao<T> {
 

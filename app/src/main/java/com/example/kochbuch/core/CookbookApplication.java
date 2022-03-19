@@ -21,7 +21,7 @@ public class CookbookApplication extends Application {
         boolean darkModeEnabled = sharedPreferences.getBoolean(Constants.PREF_DARK_MODE, false);
         AppCompatDelegate.setDefaultNightMode(
                 darkModeEnabled ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO
-        );
+        ); // sets dark mode when dark mode is also the main theme for the android device
 
         // Init Repo & Database
         RecipeRepository.getRepository(this);

@@ -16,6 +16,9 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
+/**
+ * repository for operations in the Recipe and RecipeIngredient tables
+ */
 public class RecipeRepository {
 
     public static final  String LOG_TAG = "RecipeRepository";

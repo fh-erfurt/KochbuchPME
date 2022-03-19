@@ -29,7 +29,6 @@ public class RecipeDetailFragment extends BaseFragment {
     private Button btnFavorite;
     private LiveData<List<RecipeIngredient>> recipeIngredientsLiveData;
     private TableLayout ingredientTable;
-    private View localView;
 
     public static  RecipeDetailFragment newInstance(long recipeId){
         RecipeDetailFragment fragment = new RecipeDetailFragment();
@@ -44,7 +43,6 @@ public class RecipeDetailFragment extends BaseFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
-        //this.localView = root;
         viewModel = this.getViewModel( RecipeDetailViewModel.class );
 
         assert getArguments() != null;
@@ -86,8 +84,25 @@ public class RecipeDetailFragment extends BaseFragment {
         this.ingredientTable.setStretchAllColumns(true);
         this.ingredientTable.bringToFront();
         this.ingredientTable.removeAllViews();
+
+        TableRow tableHead = new TableRow(this.getContext());
+        TextView txtName1 = new TextView(this.getContext());
+        txtName1.setTextSize(12);
+        txtName1.setText(String.format("%s","Name"));
+        tableHead.addView(txtName1);
+
+        TextView txtGramm1 = new TextView(this.getContext());
+        txtGramm1.setTextSize(12);
+        txtGramm1.setText(String.format("%s","Gramm"));
+        tableHead.addView(txtGramm1);
+
+        TextView txtkcal1001 = new TextView(this.getContext());
+        txtkcal1001.setTextSize(12);
+        txtkcal1001.setText(String.format("%s","per 100g"));
+        tableHead.addView(txtkcal1001);
+        this.ingredientTable.addView(tableHead);
+
         for (RecipeIngredient ri:recipeIngredients) {
-            //System.out.println(ri.getIngredientId()+" "+ri.getIngredient().getName());
             // name
             TableRow tableRow = new TableRow(this.getContext());
 
@@ -141,6 +156,7 @@ public class RecipeDetailFragment extends BaseFragment {
 
         // gets the button to favorite or unfavorite a recipe
         this.btnFavorite = getView().findViewById(R.id.favorite_button);
+
         // click listener switches between favorite and unfavorite and applies the change as an update
         this.btnFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -159,11 +175,7 @@ public class RecipeDetailFragment extends BaseFragment {
         }else{
             this.btnFavorite.setText(String.format("%s","merken"));
         }
-
-
-
-
-
+        // gets the picturepath of the recipe if exists
         Picasso p = Picasso.get();
         if(recipe.getPicturePath() != null && !recipe.getPicturePath().equals("")) {
             p.load(recipe.getPicturePath())

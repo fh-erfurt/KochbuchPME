@@ -71,8 +71,8 @@ public class RecipePagerFragment extends BaseFragment {
                     super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 }
                 /**
-                 * sets the argument for the pager to position of the currentItem this is important to prevent the observer
-                 * from jumping back to the first selected position after changing the favorite entry in the recipe table
+                 * sets the argument for the pager to the position of the currentItem, this is important to prevent the observer
+                 * from jumping back to the first selected position, after changing the favorite entry in the recipe table
                  * @param position
                  */
                 @Override

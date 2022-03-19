@@ -6,9 +6,8 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 
 import com.example.kochbuch.model.Ingredient;
-import com.example.kochbuch.model.Recipe;
-
 import java.util.List;
+
 @Dao
 public interface IngredientDao extends BaseDao<Ingredient>{
 

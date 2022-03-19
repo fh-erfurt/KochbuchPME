@@ -6,6 +6,9 @@ import androidx.room.Entity;
 
 import com.example.kochbuch.enums.Foodtypes;
 
+/**
+ * Ingredient Model
+ */
 @Entity(tableName = "Ingredient")
 public class Ingredient extends Basemodel {
 

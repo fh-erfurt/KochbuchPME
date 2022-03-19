@@ -39,7 +39,7 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
                 recipeClickListener.onClick( this.currentRecipeId );
             });
         }
-        // hmm
+
         public ItemDetailsLookup.ItemDetails<Long> getItemDetails() {
             return new ItemDetailsLookup.ItemDetails<Long>() {
                 @Override
@@ -113,7 +113,6 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
 
     public Recipe getRecipe( int position )
     {
-        System.out.println("index"+position);
         return getItemById(position);
     }
 }

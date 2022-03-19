@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class RecipeItemDetailsLookup extends ItemDetailsLookup<Long> {
     private final RecyclerView recyclerView;
-    // it makes the recyclerview do the stuff it does i dunno tbh
+
     public RecipeItemDetailsLookup(RecyclerView recyclerView){
         this.recyclerView = recyclerView;
     }

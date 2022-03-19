@@ -8,12 +8,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.kochbuch.model.Ingredient;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 
+/**
+ * repository for operations in the ingredient table
+ */
 public class IngredientRepository {
 
     public static final  String LOG_TAG = "IngredientRepository";

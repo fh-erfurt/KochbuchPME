@@ -6,7 +6,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 /**
- * the Basemodel
+ * the Basemodel for model classes (all models share these columns)
  */
 public abstract class Basemodel {
 
