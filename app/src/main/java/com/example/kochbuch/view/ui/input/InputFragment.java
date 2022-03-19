@@ -15,6 +15,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,7 @@ public class InputFragment extends BaseFragment {
     private AutoCompleteTextView ingredientField;
     private EditText ingredientweightField;
     private Button addbtn;
+    private RadioGroup foodtypesRadioGroup;
 
 
     private List<RecipeIngredient> recipeIngredientList;
@@ -69,6 +71,14 @@ public class InputFragment extends BaseFragment {
                     instructionField.getText().toString(),
                     descriptionField.getText().toString(),
                     Foodtypes.VEGETARIAN);
+            int checkedRadioButtonId = this.foodtypesRadioGroup.getCheckedRadioButtonId();
+            if (checkedRadioButtonId == R.id.recipe_input_foodtypes_vegan) {
+                newRecipe.setFoodtype(Foodtypes.VEGAN);
+            } else if (checkedRadioButtonId == R.id.recipe_input_foodtypes_vegetarian) {
+                newRecipe.setFoodtype(Foodtypes.VEGETARIAN);
+            } else if (checkedRadioButtonId == R.id.recipe_input_foodtypes_omnivore) {
+                newRecipe.setFoodtype(Foodtypes.OMNIVORE);
+            }
             System.out.println(this.currentPicturePath);
             newRecipe.setPicturePath( this.currentPicturePath );
 
@@ -97,6 +107,7 @@ public class InputFragment extends BaseFragment {
             this.picturePreview.setOnClickListener( this.picturePreviewClickListener );
             this.recipeIngredientList = new ArrayList<>();
             saveBtn.setOnClickListener(this.saveButtonClickListener);
+            this.foodtypesRadioGroup = root.findViewById(R.id.recipe_input_foodtypes);
 
         return root;
     }
