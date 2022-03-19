@@ -34,6 +34,7 @@ public class RecipeIngredient extends Basemodel {
 
     public RecipeIngredient(int quantityInG,Ingredient ingredient){
         this.quantityInG = quantityInG;
+        this.ingredientId = ingredient.getId();
         this.ingredient = ingredient;
     }
 

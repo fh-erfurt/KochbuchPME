@@ -12,8 +12,10 @@
         android:layout_height="127dp"
         android:layout_weight="2"
         android:contentDescription="@string/text_descr_recipe_picture"
-        tools:layout_editor_absoluteX="3dp"
-        tools:layout_editor_absoluteY="2dp"
+        app:layout_constraintBottom_toTopOf="@+id/list_item_recipe_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
@@ -24,8 +26,9 @@
         android:gravity="center"
         android:padding="5dp"
         android:textSize="16sp"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="129dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:text="@tools:sample/full_names" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

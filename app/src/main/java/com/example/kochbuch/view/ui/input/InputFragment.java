@@ -89,8 +89,6 @@ public class InputFragment extends BaseFragment {
             this.descriptionField = root.findViewById(R.id.edit_input_recipe_description);
             this.ingredientField = root.findViewById(R.id.edit_input_ingredient_name);
             this.ingredientweightField = root.findViewById(R.id.edit_input_ingredient_weight);
-            //inputViewModel.generateTestData();
-            //this.inputViewModel.generateTestData();
             Button saveBtn = root.findViewById(R.id.button_input_recipe);
             this.addbtn = root.findViewById(R.id.button_input_ingredient);
             this.picturePreview = root.findViewById( R.id.picture_preview );
