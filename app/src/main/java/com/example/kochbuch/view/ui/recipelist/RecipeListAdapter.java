@@ -1,6 +1,7 @@
 package com.example.kochbuch.view.ui.recipelist;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
     static class RecipeViewHolder extends RecyclerView.ViewHolder{
         private final TextView recipeName;
         private final ImageView recipeImage;
+        private final ImageView selectionIcon;
 
         private long currentRecipeId = -1;
         // defines the Recipe RecyclerView
@@ -34,7 +36,7 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
             super(itemView);
             this.recipeName = itemView.findViewById(R.id.list_item_recipe_name);
             this.recipeImage = itemView.findViewById(R.id.list_item_recipe_image);
-
+            this.selectionIcon = itemView.findViewById(R.id.list_item_select);
             itemView.setOnClickListener( v -> {
                 recipeClickListener.onClick( this.currentRecipeId );
             });
@@ -79,10 +81,18 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
     // this probably also
     @Override
     public void onBindViewHolder(@NonNull RecipeViewHolder holder, int position) {
-        Recipe current = this.getItem(position);
-
+        long itemId = this.getItemId(position);
+        Recipe current = this.getRecipe(itemId);
         holder.currentRecipeId = current.getId();
         holder.recipeName.setText(String.format("%s",current.getName()));
+
+        if( !selectionTracker.isSelected( itemId) ) {
+            holder.selectionIcon.setImageResource(0);
+        }
+        else{
+            holder.selectionIcon.setImageResource(R.drawable.ic_baseline_check_24);
+        }
+
 
         Picasso p = Picasso.get();
 
@@ -99,7 +109,7 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
     }
 
 
-    public Recipe getItemById(int position){
+    public Recipe getItemById(long position){
         Recipe erg = null;
         int i = 0;
         for (Recipe recipe:this.getCurrentList()) {
@@ -111,7 +121,7 @@ public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.Reci
         return erg;
     }
 
-    public Recipe getRecipe( int position )
+    public Recipe getRecipe( long position )
     {
         return getItemById(position);
     }

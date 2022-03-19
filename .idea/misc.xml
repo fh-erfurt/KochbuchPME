@@ -29,6 +29,21 @@
         <entry key="..\:/Fachhochschule/ProgrammProjekte/android/app/src/main/res/menu/recipe_filter_menu.xml" value="0.33" />
         <entry key="..\:/Fachhochschule/ProgrammProjekte/android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.40555555555555556" />
         <entry key="..\:/Fachhochschule/ProgrammProjekte/android/app/src/main/res/xml/preferences.xml" value="0.2132725430597771" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26875" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.2594871794871795" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/drawable/ic_baseline_dark_mode_24.xml" value="0.26875" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/drawable/ic_baseline_delete_24.xml" value="0.26875" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/drawable/ic_baseline_favorite_24.xml" value="0.26875" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/drawable/ic_baseline_recent_actors_24.xml" value="0.2835897435897436" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/drawable/ic_filter_icon.xml" value="0.26875" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/drawable/ic_launcher_background.xml" value="0.26875" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/drawable/icon_error.xml" value="0.26875" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/layout/fragment_recipe_pager.xml" value="0.15489130434782608" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/layout/list_item_recipe.xml" value="0.33" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/menu/bottom_nav_menu.xml" value="0.271875" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/menu/list_action_mode_menu.xml" value="0.271875" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/menu/recipe_filter_menu.xml" value="0.271875" />
+        <entry key="..\:/Fachhochschule/ProgrammProjekte/javaProject/KochbuchPME/app/src/main/res/xml/preferences.xml" value="0.15489130434782608" />
       </map>
     </option>
   </component>

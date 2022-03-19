@@ -7,12 +7,12 @@
         android:title="@string/action_menu_title_favorite"
         android:id="@+id/list_action_favorite"
         android:icon="@drawable/ic_baseline_favorite_24"
-        android:iconTint="@color/black" />
+        android:iconTint="@color/white" />
 
     <item
         android:title="@string/action_menu_title_delete"
         android:id="@+id/list_action_delete"
         android:icon="@drawable/ic_baseline_delete_24"
-        android:iconTint="@color/black" />
+        android:iconTint="@color/white" />
 
 </menu>
