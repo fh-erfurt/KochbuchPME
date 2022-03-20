@@ -4,8 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 
-import com.example.kochbuch.enums.Foodtypes;
-
 /**
  * Ingredient Model
  */

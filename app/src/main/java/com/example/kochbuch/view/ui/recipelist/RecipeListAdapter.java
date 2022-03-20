@@ -1,7 +1,6 @@
 package com.example.kochbuch.view.ui.recipelist;
 
 import android.content.Context;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,8 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.kochbuch.R;
 import com.example.kochbuch.model.Recipe;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 public class RecipeListAdapter extends ListAdapter<Recipe,RecipeListAdapter.RecipeViewHolder>{
     public interface RecipeClickListener{

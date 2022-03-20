@@ -26,10 +26,6 @@ import java.util.concurrent.Executors;
 
 /*
     Our Database Management class
-
-    Note the list of classes that represent entities. Here, we just have a single class: Contact.
-    However, one can add more of needed. Any changes to the database like adding entities must
-    result in a new, higher version number.
  */
 @Database( entities = {Recipe.class, Ingredient.class, RecipeIngredient.class}, version = 4)
 public abstract class CookbookDatabase extends RoomDatabase {

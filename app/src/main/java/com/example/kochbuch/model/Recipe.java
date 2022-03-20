@@ -1,7 +1,6 @@
 package com.example.kochbuch.model;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
@@ -10,7 +9,6 @@ import com.example.kochbuch.enums.Foodtypes;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * recipe Model

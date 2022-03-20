@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceManager;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -18,7 +17,6 @@ import com.example.kochbuch.core.Constants;
 import com.example.kochbuch.model.Recipe;
 import com.example.kochbuch.view.ui.core.BaseFragment;
 import com.example.kochbuch.view.ui.recipedetail.RecipeDetailFragment;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.Collections;
 import java.util.List;

@@ -2,9 +2,8 @@ package com.example.kochbuch.view.ui.settings;
 
 import android.os.Bundle;
 
-import androidx.preference.PreferenceFragmentCompat;
-
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.example.kochbuch.R;
 import com.example.kochbuch.core.Constants;

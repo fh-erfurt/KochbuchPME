@@ -191,18 +191,16 @@ public class InputFragment extends BaseFragment {
             if (v.getId() == R.id.button_input_ingredient) {
                 String ingredientName = ingredientField.getText().toString();
                 int ingredientWeight = Integer.parseInt(ingredientweightField.getText().toString());
-                RecipeIngredient newIngredient = null;
                 for (Ingredient ingredient: ingredients){
                     if (ingredient.getName().equals(ingredientName) ){
-                        newIngredient = new RecipeIngredient(ingredientWeight, ingredient);
+                        recipeIngredientList.add(new RecipeIngredient(ingredientWeight, ingredient));
                     }
                 }
 
-                recipeIngredientList.add(newIngredient);
                 ingredientField.setText("");
                 ingredientweightField.setText("");
                 for (RecipeIngredient ringredient: recipeIngredientList){
-                System.out.println(ringredient.getIngredient().getName() + " : " +ringredient.getQuantityInG() );
+                    System.out.println(ringredient.getIngredient().getName() + " : " +ringredient.getQuantityInG() );
                 }
             }
             }

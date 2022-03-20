@@ -3,18 +3,10 @@ package com.example.kochbuch.storage;
 import android.content.Context;
 import android.os.Environment;
 
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.List;
-
-import com.example.kochbuch.model.Ingredient;
-import com.example.kochbuch.model.Recipe;
-import com.example.kochbuch.model.RecipeIngredient;
 
 public class FileSystemHandler {
 

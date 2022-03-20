@@ -5,11 +5,8 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-
-import com.example.kochbuch.enums.Foodtypes;
 import com.example.kochbuch.model.Recipe;
 import com.example.kochbuch.storage.RecipeRepository;
-import com.example.kochbuch.view.ui.recipedetail.RecipeDetailFragment;
 
 import java.util.List;
 

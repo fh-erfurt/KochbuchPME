@@ -5,7 +5,6 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.kochbuch.R;
 import com.example.kochbuch.model.Recipe;
 import com.example.kochbuch.storage.RecipeRepository;
 

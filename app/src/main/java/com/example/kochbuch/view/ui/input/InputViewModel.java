@@ -5,14 +5,12 @@ import android.app.Application;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.example.kochbuch.enums.Foodtypes;
 import com.example.kochbuch.model.Ingredient;
 import com.example.kochbuch.model.Recipe;
 import com.example.kochbuch.model.RecipeIngredient;
 import com.example.kochbuch.storage.IngredientRepository;
 import com.example.kochbuch.storage.RecipeRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InputViewModel extends AndroidViewModel {

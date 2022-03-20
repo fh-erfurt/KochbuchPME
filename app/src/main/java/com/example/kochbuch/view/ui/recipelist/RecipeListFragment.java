@@ -24,9 +24,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kochbuch.R;
 import com.example.kochbuch.model.Recipe;
-import com.example.kochbuch.view.ui.recipelist.RecipeItemDetailsLookup;
-import com.example.kochbuch.view.ui.recipelist.RecipeListAdapter;
-import com.example.kochbuch.view.ui.recipelist.RecipeListViewModel;
 import com.example.kochbuch.view.ui.core.BaseFragment;
 
 import java.util.ArrayList;
