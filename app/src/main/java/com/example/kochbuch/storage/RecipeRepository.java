@@ -85,13 +85,9 @@ public class RecipeRepository {
         CookbookDatabase.execute(()->recipeDao.update(this.prepareContactForWriting(recipe)));
     }
 
-    public void deleteAllRecipes(){
-        CookbookDatabase.execute(recipeDao::deleteAll);
-    }
-    public void deleteAllRecipeIngredients(){ CookbookDatabase.execute(recipeIngredientDao::deleteAll);}
-
     public void deleteFullRecipe(Recipe recipe){
         CookbookDatabase.execute(()->recipeIngredientDao.delete(recipe.getIngredients()));
+        FileSystemHandler.deleteFile(recipe.getPicturePath());
         CookbookDatabase.execute(()->recipeDao.delete(recipe));
     }
 
