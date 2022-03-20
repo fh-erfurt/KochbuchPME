@@ -1,6 +1,7 @@
 package com.example.kochbuch.storage;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -9,6 +10,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import com.example.kochbuch.R;
 import com.example.kochbuch.enums.Foodtypes;
 import com.example.kochbuch.model.Ingredient;
 import com.example.kochbuch.model.Recipe;
@@ -293,6 +295,8 @@ public abstract class CookbookDatabase extends RoomDatabase {
                         "leckere Nudeln mit Tomatensoße", Foodtypes.VEGETARIAN);
                 RecipeIngredientDao riDao = INSTANCE.recipeIngredientDao();
                 RecipeDao rdao = INSTANCE.recipeDao();
+                Uri path = Uri.parse("android.resource://com.example.kochbuch/"+R.drawable.spaghetti);
+                spaghetti.setPicturePath(path.toString());
                 rdao.insert(spaghetti);
                 long spaghettiId = rdao.getRecipeIdByName("Spagetti mit Tomatensoße");
                 List<RecipeIngredient>  recipeIngredients = new ArrayList<>();
@@ -313,6 +317,8 @@ public abstract class CookbookDatabase extends RoomDatabase {
                                 " Möhren zugeben, kurz aufkochen und weitere 8 Min. bei milder Hitze garen. Zuckerschoten und Garnelen zugeben und 2 Min. mitgaren.\n" +
                                 " Eier und Zitronensaft verrühren. Etwas Suppe unter Rühren zu den Eiern geben. Topf von der Herdplatte nehmen, Eimischung einrühren, die Suppe darf nicht mehr kochen! Mit Salz, Pfeffer und Zucker abschmecken.",
                         "leckere Zitronensuppe mit Garnelen", Foodtypes.OMNIVORE);
+                path = Uri.parse("android.resource://com.example.kochbuch/"+R.drawable.zitronensuppe);
+                zitronensuppe.setPicturePath(path.toString());
                 rdao.insert(zitronensuppe);
                 long zitronensuppeId = rdao.getRecipeIdByName("Zitronensuppe mit Garnelen");
                 recipeIngredients.add(new RecipeIngredient(150,idao.getIngredient("Garnelen")));
@@ -338,6 +344,8 @@ public abstract class CookbookDatabase extends RoomDatabase {
                                 " Mozzarella abtropfen lassen, in 5 Scheiben schneiden und diese halbieren. Hähnchenbrustfilets jeweils in 1cm Abständen fünfmal 1,5–2 cm tief einschneiden. Rundum leicht salzen. Einschnitte mit je 1⁄2 Tl TomatenPesto und 1⁄2 Mozzarella-Scheibe füllen.\n" +
                                 " Hähnchenbrustfilets auf das Gemüse setzen. Im heißen Ofen auf einem Rost auf der untersten Schiene 45 Min. überbacken.",
                         "leckere Überbackene Hähnchenbrust", Foodtypes.OMNIVORE);
+                path = Uri.parse("android.resource://com.example.kochbuch/"+R.drawable.haehnchen);
+                haehnchen.setPicturePath(path.toString());
                 rdao.insert(haehnchen);
                 long haehnchenId = rdao.getRecipeIdByName("Überbackene Hähnchenbrust");
                 recipeIngredients.add(new RecipeIngredient(360,idao.getIngredient("Zucchini")));
@@ -363,6 +371,8 @@ public abstract class CookbookDatabase extends RoomDatabase {
                                 " Flanksteak aus der Marinade nehmen und mit Küchenpapier trocken tupfen. Auf dem heißen Grill von jeder Seite 4-5 Minuten grillen, anschließend ca. 5 Minuten ruhen lassen.\n" +
                                 " Das Steak quer zur Faser in 1 cm dicke Scheiben aufschneiden und mit etwas Pfeffer würzen. Dazu passt Rotkohlsalat mit Kokoschips.",
                         "leckere Flanksteak vom Grill mit Asia-Aromen", Foodtypes.OMNIVORE);
+                path = Uri.parse("android.resource://com.example.kochbuch/"+R.drawable.flanksteak);
+                flanksteak.setPicturePath(path.toString());
                 rdao.insert(flanksteak);
                 long flanksteakId = rdao.getRecipeIdByName("Flanksteak vom Grill mit Asia-Aromen");
                 recipeIngredients.add(new RecipeIngredient(100,idao.getIngredient("Zitronengras")));
