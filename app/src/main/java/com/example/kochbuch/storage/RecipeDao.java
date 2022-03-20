@@ -9,6 +9,10 @@ import androidx.room.Transaction;
 import com.example.kochbuch.model.Recipe;
 
 import java.util.List;
+
+/**
+ * RecipeDao
+ */
 @Dao
 public interface RecipeDao extends BaseDao<Recipe> {
 

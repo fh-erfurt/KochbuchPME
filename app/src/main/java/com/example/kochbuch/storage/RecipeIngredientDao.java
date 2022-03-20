@@ -10,6 +10,10 @@ import com.example.kochbuch.model.RecipeIngredientIngredient;
 
 import java.util.List;
 
+/**
+ * RecipeIngredientDao
+ */
+
 @Dao
 public interface RecipeIngredientDao extends BaseDao<RecipeIngredient>{
 
